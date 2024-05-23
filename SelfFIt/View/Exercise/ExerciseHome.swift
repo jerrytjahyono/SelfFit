@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct ExerciseHome: View {
+    
+    
+    
     var body: some View {
-        Text("This is Home!")
+        NavigationStack{
+            List{
+                HighlightView()
+                
+                NavigationLink{
+                    PreparationPlankForm()
+                } label:{
+                    ExerciseRow(title: "Plank", image: "")
+                }
+                NavigationLink{
+                    PreparationLegRaisesForm()
+                } label:{
+                    ExerciseRow(title: "Leg Raise", image: "")
+                }
+            }
+            .navigationTitle("Home")
+            .listStyle(.inset)
+        }
+        .navigationBarTitleDisplayMode(.automatic)
     }
 }
 
