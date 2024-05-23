@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct HistoryList: View {
+    var histories: [History] = [
+        History(title: "Plank"),
+        History(title: "Leg Raise"),
+        History(title: "Shuttle Run"),
+        History(title: "Leg Raise"),
+    ]
+    
     var body: some View {
-        Text("This is History!")
+        NavigationStack{
+
+            List{
+                Section(header: Text("Exercises")){
+                    ForEach(histories){ history in
+                        NavigationLink{
+                            HistoryRow(history:history)                    } label:{
+                            HistoryRow(history:history)
+                        }
+                    }
+                }
+
+            }
+            .navigationTitle("History")
+        }
+        .navigationBarTitleDisplayMode(.automatic)
     }
 }
 
