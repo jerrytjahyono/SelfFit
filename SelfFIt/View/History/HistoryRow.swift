@@ -10,13 +10,13 @@ import SwiftUI
 struct HistoryRow: View {
 
     
-    var history: History
+    var exercise: any Exercise
     
     var body: some View {
         HStack{
             VStack(alignment: .leading){
-                Text(history.title)
-                Text(history.formattedDate())
+                Text(exercise.displayExercise())
+                Text(exercise.formattedDate())
                     .font(.subheadline)
                     .fontWeight(.thin)
                     
@@ -26,6 +26,6 @@ struct HistoryRow: View {
     }
 }
 
-#Preview {
-    HistoryRow(history: histories[0])
-}
+//#Preview {
+//    HistoryRow(history: histories[0])
+//}
