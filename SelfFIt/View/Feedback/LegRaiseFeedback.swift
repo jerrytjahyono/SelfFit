@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LegRaiseFeedback: View {
+    let legRaise: LegRaise
+    
     var body: some View {
         NavigationStack{
             List {
@@ -15,43 +17,43 @@ struct LegRaiseFeedback: View {
                     HStack {
                         Text("Date")
                         Spacer()
-                        Text("2/2/2020")
+                        Text(legRaise.date.formatted(date: .numeric, time: .omitted))
                     }
                     HStack {
                         Text("Time")
                         Spacer()
-                        Text("12:12")
+                        Text(legRaise.date.formatted(date: .omitted, time: .shortened))
                     }
                 }
                 Section(header: Text("Record")) {
                     HStack {
                         Text("Sets")
                         Spacer()
-                        Text("2")
+                        Text("\(legRaise.set)")
+                    }
+                    HStack {
+                        Text("Repetition")
+                        Spacer()
+                        Text("\(legRaise.repetition)")
                     }
                     HStack {
                         Text("Duration")
                         Spacer()
-                        Text("02:12")
+                        Text(legRaise.duration)
                     }
                     HStack {
-                        Text("Duration")
+                        Text("Rest")
                         Spacer()
-                        Text("02:12")
-                    }
-                    HStack {
-                        Text("Calories Burned")
-                        Spacer()
-                        Text("2")
+                        Text(legRaise.rest)
                     }
                 }
             }
-            .navigationTitle("Leg Raise")
+            .navigationTitle(legRaise.displayExercise())
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
 #Preview {
-    LegRaiseFeedback()
+    LegRaiseFeedback(legRaise: LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12"))
 }

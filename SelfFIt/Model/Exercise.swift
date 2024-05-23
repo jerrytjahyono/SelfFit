@@ -13,5 +13,5 @@ protocol Exercise: Codable, Identifiable, Hashable{
     var imageName: String { get }
     
     func displayExercise() -> String
-    func formattedDte() -> String
+    func formattedDate() -> String
 }

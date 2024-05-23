@@ -17,11 +17,11 @@ struct Plank: Exercise {
     var imageName: String = ""
     
     func displayExercise() -> String {
-        return "Leg Raise"
+        return "Plank"
     }
-    func formattedDte() -> String {
+    func formattedDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d MM, HH:mm"
+        dateFormatter.dateFormat = "d MMM, HH:mm"
         return dateFormatter.string(from: date)
     }
 }

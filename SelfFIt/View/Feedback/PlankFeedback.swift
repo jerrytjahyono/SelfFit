@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PlankFeedback: View {
+    var plank: Plank
     
     var body: some View {
         NavigationStack{
@@ -16,43 +17,43 @@ struct PlankFeedback: View {
                     HStack {
                         Text("Date")
                         Spacer()
-                        Text("2/2/2020")
+                        Text(plank.date.formatted(date: .numeric, time: .omitted))
                     }
                     HStack {
                         Text("Time")
                         Spacer()
-                        Text("12:12")
+                        Text(plank.date.formatted(date: .omitted, time: .shortened))
                     }
                 }
                 Section(header: Text("Record")) {
                     HStack {
                         Text("Sets")
                         Spacer()
-                        Text("2")
+                        Text("\(plank.set)")
+                    }
+                    HStack {
+                        Text("Repetition")
+                        Spacer()
+                        Text("\(plank.repetition)")
                     }
                     HStack {
                         Text("Duration")
                         Spacer()
-                        Text("02:12")
+                        Text(plank.duration)
                     }
                     HStack {
-                        Text("Duration")
+                        Text("Rest")
                         Spacer()
-                        Text("02:12")
-                    }
-                    HStack {
-                        Text("Calories Burned")
-                        Spacer()
-                        Text("2")
+                        Text(plank.rest)
                     }
                 }
             }
-            .navigationTitle("Plank")
+            .navigationTitle(plank.displayExercise())
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
 #Preview {
-    PlankFeedback()
+    PlankFeedback(plank: Plank(set: 4, repetition: 4, duration: "08:00", rest: "05:12"))
 }

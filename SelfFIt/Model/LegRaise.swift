@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 struct LegRaise: Exercise {
     var id: String = UUID().uuidString
@@ -21,9 +20,9 @@ struct LegRaise: Exercise {
         return "Leg Raise"
     }
     
-    func formattedDte() -> String {
+    func formattedDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d MM, HH:mm"
+        dateFormatter.dateFormat = "d MMM, HH:mm"
         return dateFormatter.string(from: date)
     }
 }
