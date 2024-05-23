@@ -14,6 +14,8 @@
 		F95EC5A72BFF6CEB00164CE7 /* HistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5A62BFF6CEB00164CE7 /* HistoryList.swift */; };
 		F95EC5AB2BFF6D6800164CE7 /* ExerciseHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5AA2BFF6D6800164CE7 /* ExerciseHome.swift */; };
 		F95EC5B02BFF6DBE00164CE7 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5AF2BFF6DBE00164CE7 /* History.swift */; };
+		F95EC5B92BFF796600164CE7 /* PreparationPlankForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5B82BFF796600164CE7 /* PreparationPlankForm.swift */; };
+		F95EC5BE2BFF958800164CE7 /* PreparationLegRaisesForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5BD2BFF958800164CE7 /* PreparationLegRaisesForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		F95EC5A62BFF6CEB00164CE7 /* HistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryList.swift; sourceTree = "<group>"; };
 		F95EC5AA2BFF6D6800164CE7 /* ExerciseHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHome.swift; sourceTree = "<group>"; };
 		F95EC5AF2BFF6DBE00164CE7 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		F95EC5B82BFF796600164CE7 /* PreparationPlankForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparationPlankForm.swift; sourceTree = "<group>"; };
+		F95EC5BD2BFF958800164CE7 /* PreparationLegRaisesForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparationLegRaisesForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,10 +108,36 @@
 			isa = PBXGroup;
 			children = (
 				F95EC5972BFF68CD00164CE7 /* ContentView.swift */,
+				F95EC5B42BFF778600164CE7 /* Preparation */,
 				F95EC5AC2BFF6D7600164CE7 /* Exercise */,
 				F95EC5AD2BFF6D9000164CE7 /* History */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F95EC5B42BFF778600164CE7 /* Preparation */ = {
+			isa = PBXGroup;
+			children = (
+				F95EC5BC2BFF950000164CE7 /* PreparationLegRaises */,
+				F95EC5B52BFF779800164CE7 /* PreparationPlank */,
+			);
+			path = Preparation;
+			sourceTree = "<group>";
+		};
+		F95EC5B52BFF779800164CE7 /* PreparationPlank */ = {
+			isa = PBXGroup;
+			children = (
+				F95EC5B82BFF796600164CE7 /* PreparationPlankForm.swift */,
+			);
+			path = PreparationPlank;
+			sourceTree = "<group>";
+		};
+		F95EC5BC2BFF950000164CE7 /* PreparationLegRaises */ = {
+			isa = PBXGroup;
+			children = (
+				F95EC5BD2BFF958800164CE7 /* PreparationLegRaisesForm.swift */,
+			);
+			path = PreparationLegRaises;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,10 +210,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F95EC5B92BFF796600164CE7 /* PreparationPlankForm.swift in Sources */,
 				F95EC5B02BFF6DBE00164CE7 /* History.swift in Sources */,
 				F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */,
 				F95EC5A72BFF6CEB00164CE7 /* HistoryList.swift in Sources */,
 				F95EC5962BFF68CD00164CE7 /* SelfFItApp.swift in Sources */,
+				F95EC5BE2BFF958800164CE7 /* PreparationLegRaisesForm.swift in Sources */,
 				F95EC5AB2BFF6D6800164CE7 /* ExerciseHome.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
