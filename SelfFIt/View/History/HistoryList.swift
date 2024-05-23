@@ -8,16 +8,10 @@
 import SwiftUI
 
 struct HistoryList: View {
-//    var histories: [History] = [
-//        History(title: "Plank"),
-//        History(title: "Leg Raise"),
-//        History(title: "Shuttle Run"),
-//        History(title: "Leg Raise"),
-//    ]
     
     var exercises: [any Exercise] = [
         LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12"),
-        Plank(set: 4, repetition: 4, duration: "08:00", rest: "05:12")
+        Plank(repetition: 4, duration: "08:00", rest: "05:12")
     ]
     
     var body: some View {
@@ -45,6 +39,7 @@ struct HistoryList: View {
 
             }
             .navigationTitle("History")
+            .listStyle(.inset)
         }
         .navigationBarTitleDisplayMode(.automatic)
     }

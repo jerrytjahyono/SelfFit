@@ -10,7 +10,6 @@ import Foundation
 struct Plank: Exercise {
     var id: String = UUID().uuidString
     var date: Date = Date()
-    var set: Int
     var repetition: Int
     var duration: String
     var rest: String

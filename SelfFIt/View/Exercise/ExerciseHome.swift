@@ -17,19 +17,14 @@ struct ExerciseHome: View {
                 HighlightView()
                 
                 NavigationLink{
-                    ExerciseRow(title: "Plank", image: "")
+                    PreparationPlankForm()
                 } label:{
                     ExerciseRow(title: "Plank", image: "")
                 }
                 NavigationLink{
-                    ExerciseRow(title: "Leg Raise", image: "")
+                    PreparationLegRaisesForm()
                 } label:{
                     ExerciseRow(title: "Leg Raise", image: "")
-                }
-                NavigationLink{
-                    ExerciseRow(title: "Shuttle Run", image: "")
-                } label:{
-                    ExerciseRow(title: "Shuttle Run", image: "")
                 }
             }
             .navigationTitle("Home")

@@ -14,12 +14,16 @@ struct HistoryRow: View {
     
     var body: some View {
         HStack{
+            Image(systemName: exercise.imageName)
+                .resizable()
+                .frame(width: 50, height: 50)
+                .background(Color.blue)
+                .cornerRadius(10)
             VStack(alignment: .leading){
                 Text(exercise.displayExercise())
                 Text(exercise.formattedDate())
                     .font(.subheadline)
                     .fontWeight(.thin)
-                    
             }
             Spacer()
         }

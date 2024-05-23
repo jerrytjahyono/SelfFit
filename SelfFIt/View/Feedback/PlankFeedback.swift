@@ -27,11 +27,6 @@ struct PlankFeedback: View {
                 }
                 Section(header: Text("Record")) {
                     HStack {
-                        Text("Sets")
-                        Spacer()
-                        Text("\(plank.set)")
-                    }
-                    HStack {
                         Text("Repetition")
                         Spacer()
                         Text("\(plank.repetition)")
@@ -55,5 +50,5 @@ struct PlankFeedback: View {
 }
 
 #Preview {
-    PlankFeedback(plank: Plank(set: 4, repetition: 4, duration: "08:00", rest: "05:12"))
+    PlankFeedback(plank: Plank(repetition: 4, duration: "08:00", rest: "05:12"))
 }
