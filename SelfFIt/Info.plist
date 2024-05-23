@@ -5,6 +5,6 @@
 	<key></key>
 	<string></string>
 	<key>NSCameraReactionEffectGesturesEnabledDefault</key>
-	<false/>
+	<true/>
 </dict>
 </plist>

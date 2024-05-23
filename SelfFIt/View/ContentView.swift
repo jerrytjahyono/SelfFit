@@ -10,6 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @State private var selection: Tab = .home
+    @State public var isTabViewActive = true
     
     enum Tab {
         case home
@@ -17,6 +18,7 @@ struct ContentView: View {
     }
     
     var body: some View {
+        
         TabView(selection: $selection) {
             ExerciseHome()
                 .tabItem {
