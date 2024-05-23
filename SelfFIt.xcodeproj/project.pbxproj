@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		EEA9C1C92BFF77A10083BC9A /* PlankCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1C82BFF77A10083BC9A /* PlankCameraService.swift */; };
 		EEA9C1CB2BFF79230083BC9A /* PlankExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1CA2BFF79230083BC9A /* PlankExercise.swift */; };
-		EEA9C1CE2BFF9C810083BC9A /* LegRaiseCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1CD2BFF9C810083BC9A /* LegRaiseCameraService.swift */; };
-		EEA9C1D02BFF9CAF0083BC9A /* LegRaiseExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1CF2BFF9CAF0083BC9A /* LegRaiseExercise.swift */; };
 		F95EC5962BFF68CD00164CE7 /* SelfFItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */; };
 		F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5972BFF68CD00164CE7 /* ContentView.swift */; };
 		F95EC59C2BFF68D000164CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F95EC59B2BFF68D000164CE7 /* Assets.xcassets */; };
@@ -23,8 +21,6 @@
 /* Begin PBXFileReference section */
 		EEA9C1C82BFF77A10083BC9A /* PlankCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankCameraService.swift; sourceTree = "<group>"; };
 		EEA9C1CA2BFF79230083BC9A /* PlankExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankExercise.swift; sourceTree = "<group>"; };
-		EEA9C1CD2BFF9C810083BC9A /* LegRaiseCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseCameraService.swift; sourceTree = "<group>"; };
-		EEA9C1CF2BFF9CAF0083BC9A /* LegRaiseExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseExercise.swift; sourceTree = "<group>"; };
 		F95EC5922BFF68CD00164CE7 /* SelfFIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelfFIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfFItApp.swift; sourceTree = "<group>"; };
 		F95EC5972BFF68CD00164CE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,7 +46,6 @@
 		EEA9C1C62BFF77640083BC9A /* Exercise Activity */ = {
 			isa = PBXGroup;
 			children = (
-				EEA9C1CC2BFF9C5E0083BC9A /* LegRise */,
 				EEA9C1C72BFF777D0083BC9A /* Plank */,
 			);
 			path = "Exercise Activity";
@@ -63,15 +58,6 @@
 				EEA9C1CA2BFF79230083BC9A /* PlankExercise.swift */,
 			);
 			path = Plank;
-			sourceTree = "<group>";
-		};
-		EEA9C1CC2BFF9C5E0083BC9A /* LegRise */ = {
-			isa = PBXGroup;
-			children = (
-				EEA9C1CD2BFF9C810083BC9A /* LegRaiseCameraService.swift */,
-				EEA9C1CF2BFF9CAF0083BC9A /* LegRaiseExercise.swift */,
-			);
-			path = LegRise;
 			sourceTree = "<group>";
 		};
 		F95EC5892BFF68CD00164CE7 = {
@@ -220,9 +206,7 @@
 				EEA9C1C92BFF77A10083BC9A /* PlankCameraService.swift in Sources */,
 				F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */,
 				F95EC5A72BFF6CEB00164CE7 /* HistoryList.swift in Sources */,
-				EEA9C1CE2BFF9C810083BC9A /* LegRaiseCameraService.swift in Sources */,
 				F95EC5962BFF68CD00164CE7 /* SelfFItApp.swift in Sources */,
-				EEA9C1D02BFF9CAF0083BC9A /* LegRaiseExercise.swift in Sources */,
 				F95EC5AB2BFF6D6800164CE7 /* ExerciseHome.swift in Sources */,
 				EEA9C1CB2BFF79230083BC9A /* PlankExercise.swift in Sources */,
 			);

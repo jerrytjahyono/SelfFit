@@ -4,7 +4,6 @@
 //
 //  Created by Alizaenal Abidin on 23/05/24.
 //
-
 import SwiftUI
 
 struct PlankExercise: View {
