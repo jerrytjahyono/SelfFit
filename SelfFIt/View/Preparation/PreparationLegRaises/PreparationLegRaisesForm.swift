@@ -144,12 +144,12 @@ struct PreparationLegRaisesForm: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("Plank")
+            .navigationTitle("LegRaise")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Start") {
-                        // Masuk ke Exercise view
+                    NavigationLink("Next"){
+                        LegRaiseExercise()
                     }
                 }
             }
