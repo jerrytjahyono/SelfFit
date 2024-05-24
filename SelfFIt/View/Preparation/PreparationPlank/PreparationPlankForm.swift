@@ -134,8 +134,8 @@ struct PreparationPlankForm: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Start") {
-                        // Masuk ke Exercise view
+                    NavigationLink("Next"){
+                        PlankExercise()
                     }
                 }
             }
