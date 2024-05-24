@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041715602C0057D200DFF76F /* HighlightItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417155F2C0057D200DFF76F /* HighlightItem.swift */; };
+		041715622C005D9D00DFF76F /* HighlightBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041715612C005D9D00DFF76F /* HighlightBackground.swift */; };
 		0463508D2BFF7C0A00F68CBD /* HighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463508C2BFF7C0A00F68CBD /* HighlightView.swift */; };
 		046350912BFF808B00F68CBD /* ExerciseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046350902BFF808B00F68CBD /* ExerciseRow.swift */; };
 		046350932BFF848600F68CBD /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046350922BFF848600F68CBD /* HistoryRow.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0417155F2C0057D200DFF76F /* HighlightItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightItem.swift; sourceTree = "<group>"; };
+		041715612C005D9D00DFF76F /* HighlightBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightBackground.swift; sourceTree = "<group>"; };
 		0463508C2BFF7C0A00F68CBD /* HighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightView.swift; sourceTree = "<group>"; };
 		046350902BFF808B00F68CBD /* ExerciseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRow.swift; sourceTree = "<group>"; };
 		046350922BFF848600F68CBD /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 				F95EC5AA2BFF6D6800164CE7 /* ExerciseHome.swift */,
 				046350902BFF808B00F68CBD /* ExerciseRow.swift */,
 				0463508C2BFF7C0A00F68CBD /* HighlightView.swift */,
+				0417155F2C0057D200DFF76F /* HighlightItem.swift */,
+				041715612C005D9D00DFF76F /* HighlightBackground.swift */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";
@@ -170,8 +176,8 @@
 		F95EC5B12BFF6DCE00164CE7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EEA9C1D22BFFD3590083BC9A /* Activity Exercise */,
 				F95EC5972BFF68CD00164CE7 /* ContentView.swift */,
+				EEA9C1D22BFFD3590083BC9A /* Activity Exercise */,
 				F95EC5B42BFF778600164CE7 /* Preparation */,
 				04840B032BFF73ED00C7B02C /* Feedback */,
 				F95EC5AC2BFF6D7600164CE7 /* Exercise */,
@@ -279,6 +285,7 @@
 				F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */,
 				04840B092BFF946300C7B02C /* Plank.swift in Sources */,
 				F95EC5A72BFF6CEB00164CE7 /* HistoryList.swift in Sources */,
+				041715622C005D9D00DFF76F /* HighlightBackground.swift in Sources */,
 				EEA9C1D52BFFD3950083BC9A /* PlankCameraService.swift in Sources */,
 				046350912BFF808B00F68CBD /* ExerciseRow.swift in Sources */,
 				0463508D2BFF7C0A00F68CBD /* HighlightView.swift in Sources */,
@@ -289,6 +296,7 @@
 				04840B0B2BFF946D00C7B02C /* LegRaise.swift in Sources */,
 				EEA9C1D72BFFD3B10083BC9A /* PlankExercise.swift in Sources */,
 				04840B072BFF93FA00C7B02C /* Exercise.swift in Sources */,
+				041715602C0057D200DFF76F /* HighlightItem.swift in Sources */,
 				EECAD6272C002EB700286944 /* LegRaiseCameraService.swift in Sources */,
 				EECAD62B2C002F0600286944 /* LegRaiseExercise.swift in Sources */,
 				04840B0F2BFF980E00C7B02C /* LegRaiseFeedback.swift in Sources */,

@@ -14,17 +14,22 @@ struct ExerciseHome: View {
     var body: some View {
         NavigationStack{
             List{
-                HighlightView()
-                
-                NavigationLink{
-                    PreparationPlankForm()
-                } label:{
-                    ExerciseRow(title: "Plank", image: "")
+                Section{
+                    HighlightView()
+                        .listRowInsets(EdgeInsets())
+                        .padding(.top, 10)
                 }
-                NavigationLink{
-                    PreparationLegRaisesForm()
-                } label:{
-                    ExerciseRow(title: "Leg Raise", image: "")
+                Section(header: Text("Exercises").foregroundStyle(.black)){
+                    NavigationLink{
+                        PreparationPlankForm()
+                    } label:{
+                        ExerciseRow(title: "Plank", image: "")
+                    }
+                    NavigationLink{
+                        PreparationLegRaisesForm()
+                    } label:{
+                        ExerciseRow(title: "Leg Raise", image: "")
+                    }
                 }
             }
             .navigationTitle("Home")
