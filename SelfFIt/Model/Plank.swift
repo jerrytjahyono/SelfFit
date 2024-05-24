@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Plank: Exercise {
     var id: String = UUID().uuidString
@@ -14,6 +15,10 @@ struct Plank: Exercise {
     var duration: String
     var rest: String
     var imageName: String = ""
+    
+    var backgroundGradient: Gradient {
+        Gradient(colors: [.red, Color("pastelPink")])
+    }
     
     func displayExercise() -> String {
         return "Plank"
