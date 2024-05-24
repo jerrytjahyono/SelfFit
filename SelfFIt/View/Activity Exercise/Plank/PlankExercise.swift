@@ -16,18 +16,22 @@ struct PlankExercise: View {
     @State private var progressTime = 236
     @State private var isTimerRunning = false
     
-//    @StateObject var cameraService = PlankCameraService()
+    @StateObject var cameraService = PlankCameraService()
     @State private var timer: Timer?
     
     var body: some View {
         NavigationStack {
             ZStack {
-                       Image("PlankDummy")
-                           .resizable()
-                           .aspectRatio(contentMode: .fill)
-                           .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
-                           .frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-                           .edgesIgnoringSafeArea(.all)
+                if let frame = cameraService.cameraFrame {
+                    Image(decorative: frame, scale: 1, orientation: .down)
+                               .resizable()
+                               .aspectRatio(contentMode: .fill)
+                               .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
+                               .frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+                               .edgesIgnoringSafeArea(.all)
+                } else {
+                    Text("Please wait opening your camera....")
+                }
                        VStack(alignment: .leading) {
                            Spacer()
                            HStack(){
