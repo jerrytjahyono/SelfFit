@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct LegRaise: Exercise {
     var id: String = UUID().uuidString
@@ -16,6 +17,10 @@ struct LegRaise: Exercise {
     var rest: String
     var imageName: String = ""
     
+    var backgroundGradient: Gradient {
+        Gradient(colors: [.blue, Color("lightBlue")])
+    }
+    
     func displayExercise() -> String {
         return "Leg Raise"
     }
@@ -25,4 +30,6 @@ struct LegRaise: Exercise {
         dateFormatter.dateFormat = "d MMM, HH:mm"
         return dateFormatter.string(from: date)
     }
+    
+    
 }
