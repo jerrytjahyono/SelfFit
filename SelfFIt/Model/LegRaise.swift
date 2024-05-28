@@ -16,6 +16,7 @@ struct LegRaise: Exercise {
     var duration: String
     var rest: String
     var imageName: String = ""
+    var score: Int = 90
     
     var backgroundGradient: Gradient {
         Gradient(colors: [.blue, Color("lightBlue")])

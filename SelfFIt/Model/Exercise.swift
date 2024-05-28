@@ -12,7 +12,7 @@ protocol Exercise: Codable, Identifiable, Hashable{
     var id: String { get }
     var date: Date { get }
     var imageName: String { get }
-    
+    var score: Int { get set }
     var backgroundGradient: Gradient { get }
     
     func displayExercise() -> String
