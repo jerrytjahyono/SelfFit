@@ -19,6 +19,8 @@
 		EEA9C1D72BFFD3B10083BC9A /* PlankExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */; };
 		EECAD6272C002EB700286944 /* LegRaiseCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAD6262C002EB700286944 /* LegRaiseCameraService.swift */; };
 		EECAD62B2C002F0600286944 /* LegRaiseExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAD62A2C002F0600286944 /* LegRaiseExercise.swift */; };
+		EEDA256C2C05BF4E0061938D /* PlankAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */; };
+		EEDA257C2C05C36E0061938D /* Audios in Resources */ = {isa = PBXBuildFile; fileRef = EEDA257B2C05C36E0061938D /* Audios */; };
 		F95EC5962BFF68CD00164CE7 /* SelfFItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */; };
 		F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5972BFF68CD00164CE7 /* ContentView.swift */; };
 		F95EC59C2BFF68D000164CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F95EC59B2BFF68D000164CE7 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankExercise.swift; sourceTree = "<group>"; };
 		EECAD6262C002EB700286944 /* LegRaiseCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseCameraService.swift; sourceTree = "<group>"; };
 		EECAD62A2C002F0600286944 /* LegRaiseExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseExercise.swift; sourceTree = "<group>"; };
+		EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankAudioService.swift; sourceTree = "<group>"; };
+		EEDA257B2C05C36E0061938D /* Audios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audios; sourceTree = "<group>"; };
 		F95EC5922BFF68CD00164CE7 /* SelfFIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelfFIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfFItApp.swift; sourceTree = "<group>"; };
 		F95EC5972BFF68CD00164CE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 			children = (
 				EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */,
 				EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */,
+				EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */,
 			);
 			path = Plank;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 		F95EC5942BFF68CD00164CE7 /* SelfFIt */ = {
 			isa = PBXGroup;
 			children = (
+				EEDA257B2C05C36E0061938D /* Audios */,
 				F95EC5A52BFF696500164CE7 /* Info.plist */,
 				F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */,
 				F95EC5AE2BFF6DA400164CE7 /* Model */,
@@ -265,6 +271,7 @@
 			files = (
 				F95EC59F2BFF68D000164CE7 /* Preview Assets.xcassets in Resources */,
 				F95EC59C2BFF68D000164CE7 /* Assets.xcassets in Resources */,
+				EEDA257C2C05C36E0061938D /* Audios in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +300,7 @@
 				EECAD62B2C002F0600286944 /* LegRaiseExercise.swift in Sources */,
 				04840B0F2BFF980E00C7B02C /* LegRaiseFeedback.swift in Sources */,
 				04840B052BFF744800C7B02C /* PlankFeedback.swift in Sources */,
+				EEDA256C2C05BF4E0061938D /* PlankAudioService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

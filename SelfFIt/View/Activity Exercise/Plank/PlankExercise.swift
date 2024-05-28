@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
-import Vision
+import AVFAudio
+import AVFoundation
+
+
 struct PlankExercise: View {
     @State private var duration = "00:00"
     @State private var durationRest = "00:00"
@@ -18,6 +21,9 @@ struct PlankExercise: View {
     @State private var timer: Timer?
     
     @StateObject var cameraService = PlankCameraService()
+    
+    private var audioService = PlankAudioService()
+    @State private var isPlayingAudio = false
     
     var body: some View {
         NavigationStack {
@@ -103,7 +109,35 @@ struct PlankExercise: View {
             }
         }
     
-   
+    func giveFeedback() -> Void {
+        print("called")
+        
+        var audioPlayer: AVAudioPlayer?
+        let condition: PlankCondition = .correct
+        
+        let conditionAudio : String = {
+            switch condition {
+            case .tooHigh:
+                return "too_high"
+            case .tooLow:
+                return "too_low"
+            case .correct:
+                return "keep_it_up"
+            }
+        }()
+        
+        if let sound = Bundle.main.path(forResource: conditionAudio, ofType: "wav",inDirectory: "Audios") {
+              do {
+                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound))
+                print("play audio")
+                audioPlayer?.play()
+              } catch {
+                print("AVAudioPlayer could not be instantiated.")
+              }
+            } else {
+              print("Audio file could not be found.")
+            }
+    }
 
     }
 

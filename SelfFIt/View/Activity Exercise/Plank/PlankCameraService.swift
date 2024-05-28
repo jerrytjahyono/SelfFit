@@ -24,6 +24,12 @@ class PlankCameraService: NSObject, ObservableObject{
     
     private var cgImageFrame: CGImage?
 
+    private var audioService = PlankAudioService()
+    private var isPlayingAudio = false
+    private var audioPlayer: AVAudioPlayer?
+    
+    private var frameCount = 0 // New: Frame count to reduce update frequency
+    
     // inisiator untuk class `CameraService`
     override init(){
         super.init()
@@ -66,11 +72,12 @@ class PlankCameraService: NSObject, ObservableObject{
     // fungsi untuk memulai session secara asinkronus
     private func startSession() {
         // menjalankan proses task pada thread dengan QOA Background dibawah thread `captureQueue`
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             [weak self] in // Capture self weakly to avoid retain cycles
             guard let self = self else { return } // Safely unwrap self or return if nil
             
             self.captureSession.startRunning()
+            self.audioService.audioPlayer?.play()
         }
     }
     
@@ -103,7 +110,28 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                 self.cgImageFrame = cgImage
                 // process for VisionKit from AVFoundation Camera output
                 
+                
                 DispatchQueue.global(qos: .userInteractive).async {
+                    
+                    // simulate make feedback
+                    let randInt = Int.random(in: 0...100)
+                    if randInt == 2 {
+                        
+                        var condition: PlankCondition = .correct
+                        let randIntForCondition = Int.random(in: 0...3)
+                        switch randIntForCondition {
+                        case 1:
+                            condition = .tooLow
+                        case 2:
+                            condition = .tooHigh
+                            
+                        default:
+                            condition = .correct
+                        }
+                        
+                        
+                        self.audioService.giveFeedback(condition)
+                    }
                     
                     let requestHandler = VNImageRequestHandler(
                         cgImage: cgImage,
@@ -122,6 +150,10 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                         
                         guard let results = request.results,
                               let result = results.first else { return }
+                        
+                        print("\n\n🔍try result.recognizedPoints(.all)\n")
+                        print(try result.recognizedPoints(.all))
+                        
                         
                     } catch {
                         print("Unable to perform the request: \(error).")
@@ -160,17 +192,23 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             )
         }
         
+        
         print("\n\n\n🌍observeImagePoints\n")
         print(points)
         
         if points.count > 0 {
-            DispatchQueue.main.async {
-                self.cameraFrame = self.cameraFrame?.draw(
-                    points: points,
-                    fillColor: .red,
-                    strokeColor: .green
-                )
-            }
+            frameCount += 1 
+            
+//            DispatchQueue.main.async {
+            // Only update every 3 frames (adjust as needed)
+                if frameCount % 2 == 0 {
+                    self.cameraFrame = self.cameraFrame?.draw(
+                        points: points,
+                        fillColor: .red,
+                        strokeColor: .green
+                    )
+                }
+//            }
         }
         
     }
@@ -182,8 +220,8 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let recognizedPoints =
                 try? observation.recognizedPoints(.torso) else { return }
         
-        print("\n\n\n🦠recognizedPoints\n")
-        print(recognizedPoints)
+//        print("\n\n\n🦠recognizedPoints\n")
+//        print(recognizedPoints)
         // Torso joint names in a clockwise ordering.
         let torsoJointNames: [VNHumanBodyPoseObservation.JointName] = [
             .neck,
