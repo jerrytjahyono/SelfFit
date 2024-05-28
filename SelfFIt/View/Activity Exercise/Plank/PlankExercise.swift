@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import AVFAudio
+import AVFoundation
+
 
 struct PlankExercise: View {
     @State private var duration = "00:00"
@@ -15,20 +18,24 @@ struct PlankExercise: View {
     
     @State private var progressTime = 236
     @State private var isTimerRunning = false
+    @State private var timer: Timer?
     
     @StateObject var cameraService = PlankCameraService()
-    @State private var timer: Timer?
+    
+    private var audioService = PlankAudioService()
+    @State private var isPlayingAudio = false
     
     var body: some View {
         NavigationStack {
             ZStack {
                 if let frame = cameraService.cameraFrame {
-                    Image(decorative: frame, scale: 1, orientation: .down)
+                    Image(uiImage: frame)
                                .resizable()
                                .aspectRatio(contentMode: .fill)
                                .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
                                .frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
                                .edgesIgnoringSafeArea(.all)
+                               
                 } else {
                     Text("Please wait opening your camera....")
                 }
@@ -99,8 +106,39 @@ struct PlankExercise: View {
                 }
             }
             
+            }
         }
-        }
+    
+    func giveFeedback() -> Void {
+        print("called")
+        
+        var audioPlayer: AVAudioPlayer?
+        let condition: PlankCondition = .correct
+        
+        let conditionAudio : String = {
+            switch condition {
+            case .tooHigh:
+                return "too_high"
+            case .tooLow:
+                return "too_low"
+            case .correct:
+                return "keep_it_up"
+            }
+        }()
+        
+        if let sound = Bundle.main.path(forResource: conditionAudio, ofType: "wav",inDirectory: "Audios") {
+              do {
+                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound))
+                print("play audio")
+                audioPlayer?.play()
+              } catch {
+                print("AVAudioPlayer could not be instantiated.")
+              }
+            } else {
+              print("Audio file could not be found.")
+            }
+    }
+
     }
 
 #Preview {
