@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ExerciseHome: View {
     
-    
-    
     var body: some View {
         NavigationStack{
             List{
@@ -18,6 +16,7 @@ struct ExerciseHome: View {
                     HighlightView()
                         .listRowInsets(EdgeInsets())
                         .padding(.top, 10)
+                        .listRowSeparator(.hidden)
                 }
                 Section(header: Text("Exercises").foregroundStyle(.black)){
                     NavigationLink{

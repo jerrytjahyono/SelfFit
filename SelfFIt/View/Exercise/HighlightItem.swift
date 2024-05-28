@@ -24,9 +24,9 @@ struct HighlightItem: View {
                     .font(.caption)
                     .foregroundStyle(.white)
                 Spacer()
-                Text("100 cal")
+                Text("\(exercise.score)")
                     .font(.subheadline)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
                     .foregroundStyle(.white)
             }
             .padding()
@@ -40,6 +40,6 @@ struct HighlightItem: View {
 #Preview {
     Group{
         HighlightItem(exercise: LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12"))
-        HighlightItem(exercise: Plank(repetition: 4, duration: "08:00", rest: "05:12"))
+        HighlightItem(exercise: Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: Date(), failureCount: 4, failureDuration: Date(), plankDuration: Date(), rest: Date(),score: 84))
     }
 }
