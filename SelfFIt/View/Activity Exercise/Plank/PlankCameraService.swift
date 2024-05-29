@@ -213,6 +213,97 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         
     }
 
+    func correction(_ result: Dictionary<String,CGPoint>) -> PlankCondition? {
+        let isHaveRoot = result["VNRecognizedPointKey(_rawValue: root)"] != nil
+        let root = result["VNRecognizedPointKey(_rawValue: root)"] ?? nil
+       
+        guard let neck = result["VNRecognizedPointKey(_rawValue:neck_1_joint)"] else {
+            return nil
+        }
+        
+        let isRightHeadDirection : Bool = {
+            if isHaveRoot {
+                return neck.x > root!.x
+            }else {
+                return neck.x > 0
+            }
+        }()
+        
+    
+       guard let upLeg: CGPoint? = {
+            if isRightHeadDirection {
+                return result["VNRecognizedPointKey(_rawValue: right_upLeg_joint)"]
+            }
+           return result["VNRecognizedPointKey(_rawValue: left_upLeg_joint)"]
+        }(),
+        let leg: CGPoint? = {
+            if isRightHeadDirection {
+                return result["VNRecognizedPointKey(_rawValue: right_leg_joint)"]
+            }
+            return result["VNRecognizedPointKey(_rawValue: left_leg_joint)"]
+        }()
+        ,let foot: CGPoint? = {
+            if isRightHeadDirection {
+                return result["VNRecognizedPointKey(_rawValue: right_foot_joint)"]
+            }
+            return result["VNRecognizedPointKey(_rawValue: left_foot_joint)"]
+        }() else {
+            return nil
+        }
+        
+//        let leftUpleg = result["VNRecognizedPointKey(_rawValue: left_upLeg_joint)"]!
+//        let rightUpleg = result["VNRecognizedPointKey(_rawValue: right_upLeg_joint)"]!
+//        let leftLeg = result["VNRecognizedPointKey(_rawValue: left_leg_joint)"]!
+//        let rightLeg = result["VNRecognizedPointKey(_rawValue: right_leg_joint)"]!
+//        let leftFoot = result["VNRecognizedPointKey(_rawValue: left_foot_joint)"]!
+//        let rightFoot = result["VNRecognizedPointKey(_rawValue: right_foot_joint)"]!
+//        
+//        
+
+        
+        
+        
+        return evaluatePlank(
+            neck: neck,
+            root: root ?? upLeg!,
+            knee: leg!,
+            ankle: foot!
+        )
+        
+        func evaluatePlank(neck: CGPoint, root: CGPoint, knee: CGPoint, ankle: CGPoint, thetaIdeal: Double = 0, toleranceMin: Double = 5, toleranceMax: Double = 7) -> PlankCondition {
+            // Calculate the relative angle to the horizontal
+            let angle1 = calculateAngle(x1: neck.x, y1: neck.y, x2: root.x, y2: root.y)
+            let angle2 = calculateAngle(x1: knee.x, y1: knee.y, x2: ankle.x, y2: ankle.y)
+            
+            // Convert angle to degrees
+            let angle1Deg = angle1 * 180 / .pi
+            let angle2Deg = angle2 * 180 / .pi
+            
+            // Calculate the angle difference relative to the ideal angle (thetaIdeal)
+            let angleDiffDeg = angle1Deg - angle2Deg
+            
+            // Debug information
+            print("Angle 1 (degrees): \(angle1Deg)")
+            print("Angle 2 (degrees): \(angle2Deg)")
+            print("Angle difference (degrees): \(angleDiffDeg)")
+            
+            // Determine the evaluation based on the desired position (thetaIdeal) and tolerance range
+            if angleDiffDeg > thetaIdeal + toleranceMax {
+                return .tooLow
+            } else if angleDiffDeg < thetaIdeal - toleranceMin {
+                return .tooHigh
+            } else {
+                return .correct
+            }
+        }
+        
+        func calculateAngle(x1: Double, y1: Double, x2: Double, y2: Double) -> Double {
+            if x1 > x2 {
+                return atan2(y2 - y1, x1 - x2)
+            }
+            return atan2(y2 - y1, x2 - x1)
+        }
+    }
     
     func processObservation(_ observation: VNHumanBodyPoseObservation) {
 
