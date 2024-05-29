@@ -114,24 +114,24 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                 DispatchQueue.global(qos: .userInteractive).async {
                     
                     // simulate make feedback
-                    let randInt = Int.random(in: 0...100)
-                    if randInt == 2 {
-                        
-                        var condition: PlankCondition = .correct
-                        let randIntForCondition = Int.random(in: 0...3)
-                        switch randIntForCondition {
-                        case 1:
-                            condition = .tooLow
-                        case 2:
-                            condition = .tooHigh
-                            
-                        default:
-                            condition = .correct
-                        }
-                        
-                        
-                        self.audioService.giveFeedback(condition)
-                    }
+//                    let randInt = Int.random(in: 0...100)
+//                    if randInt == 2 {
+//                        
+//                        var condition: PlankCondition = .correct
+//                        let randIntForCondition = Int.random(in: 0...3)
+//                        switch randIntForCondition {
+//                        case 1:
+//                            condition = .tooLow
+//                        case 2:
+//                            condition = .tooHigh
+//                            
+//                        default:
+//                            condition = .correct
+//                        }
+//                        
+//                        
+//                        self.audioService.giveFeedback(condition)
+//                    }
                     
                     let requestHandler = VNImageRequestHandler(
                         cgImage: cgImage,
@@ -150,6 +150,9 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                         
                         guard let results = request.results,
                               let result = results.first else { return }
+                        
+                        
+                        
                         
                         print("\n\n🔍try result.recognizedPoints(.all)\n")
                         print(try result.recognizedPoints(.all))
@@ -175,10 +178,28 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
         // Process each observation to find the recognized body pose points.
-        observations.forEach { processObservation($0) }
+//        observations.forEach { processObservation($0) }
+        
+        
+        let plankpointNames: [VNHumanBodyPoseObservation.JointName] = [
+            .leftAnkle,
+            .rightAnkle,
+            .neck,
+            .rightKnee,
+            .leftKnee,
+            .leftHip,
+            .rightHip,
+            .root
+        ]
+        
+        let rawPointsName = observations.flatMap{ result in
+            result.availableJointNames
+                .filter{plankpointNames.contains($0.self)}
+        }
         
         let normalizedPoints = observations.flatMap { result in
             result.availableJointNames
+                .filter{plankpointNames.contains($0.self)}
                 .compactMap { try? result.recognizedPoint($0) }
                 .filter { $0.confidence > 0.1 }
         }
@@ -192,6 +213,10 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             )
         }
         
+        
+        if let correctionResult = correction(Dictionary(uniqueKeysWithValues: zip(rawPointsName, points))) {
+            self.audioService.giveFeedback(correctionResult)
+        }
         
         print("\n\n\n🌍observeImagePoints\n")
         print(points)
@@ -213,11 +238,11 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         
     }
 
-    func correction(_ result: Dictionary<String,CGPoint>) -> PlankCondition? {
-        let isHaveRoot = result["VNRecognizedPointKey(_rawValue: root)"] != nil
-        let root = result["VNRecognizedPointKey(_rawValue: root)"] ?? nil
+    func correction(_ result: Dictionary<VNHumanBodyPoseObservation.JointName,CGPoint>) -> PlankCondition? {
+        let isHaveRoot = result[.root] != nil
+        let root = result[.root] ?? nil
        
-        guard let neck = result["VNRecognizedPointKey(_rawValue:neck_1_joint)"] else {
+        guard let neck = result[.neck] else {
             return nil
         }
         
@@ -232,25 +257,28 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
     
        guard let upLeg: CGPoint? = {
             if isRightHeadDirection {
-                return result["VNRecognizedPointKey(_rawValue: right_upLeg_joint)"]
+                return result[.rightHip]
             }
-           return result["VNRecognizedPointKey(_rawValue: left_upLeg_joint)"]
+           return result[.leftHip]
         }(),
         let leg: CGPoint? = {
             if isRightHeadDirection {
-                return result["VNRecognizedPointKey(_rawValue: right_leg_joint)"]
+                return result[.rightKnee]
             }
-            return result["VNRecognizedPointKey(_rawValue: left_leg_joint)"]
-        }()
-        ,let foot: CGPoint? = {
+            return result[.leftKnee]
+        }(),
+        let foot: CGPoint? = {
             if isRightHeadDirection {
-                return result["VNRecognizedPointKey(_rawValue: right_foot_joint)"]
+                return result[.rightAnkle]
             }
-            return result["VNRecognizedPointKey(_rawValue: left_foot_joint)"]
+            return result[.leftAnkle]
         }() else {
             return nil
         }
         
+        if upLeg == nil {
+            return nil
+        }
 //        let leftUpleg = result["VNRecognizedPointKey(_rawValue: left_upLeg_joint)"]!
 //        let rightUpleg = result["VNRecognizedPointKey(_rawValue: right_upLeg_joint)"]!
 //        let leftLeg = result["VNRecognizedPointKey(_rawValue: left_leg_joint)"]!
