@@ -15,6 +15,9 @@ class PlankCameraService: NSObject, ObservableObject{
     
     // publish camera output as bitmat image into the view for can be processed with VisionKit
     @Published var cameraFrame: UIImage?
+    @Published var isOnPlankPosition: Bool = false
+    @Published var currentPlankCondition: PlankCondition?
+    
     // Variabel yang akan bertanggung jawab dalam menangkap serta mengkordinasi data dari output input camera secara streaming
     private let captureSession = AVCaptureSession()
     // Mendapatkan frames pada output video dari akses camera
@@ -112,27 +115,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                 
                 
                 DispatchQueue.global(qos: .userInteractive).async {
-                    
-                    // simulate make feedback
-//                    let randInt = Int.random(in: 0...100)
-//                    if randInt == 2 {
-//                        
-//                        var condition: PlankCondition = .correct
-//                        let randIntForCondition = Int.random(in: 0...3)
-//                        switch randIntForCondition {
-//                        case 1:
-//                            condition = .tooLow
-//                        case 2:
-//                            condition = .tooHigh
-//                            
-//                        default:
-//                            condition = .correct
-//                        }
-//                        
-//                        
-//                        self.audioService.giveFeedback(condition)
-//                    }
-                    
+                   
                     let requestHandler = VNImageRequestHandler(
                         cgImage: cgImage,
                         orientation: .init(uiIMage.imageOrientation),
@@ -150,13 +133,6 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                         
                         guard let results = request.results,
                               let result = results.first else { return }
-                        
-                        
-                        
-                        
-                        print("\n\n🔍try result.recognizedPoints(.all)\n")
-                        print(try result.recognizedPoints(.all))
-                        
                         
                     } catch {
                         print("Unable to perform the request: \(error).")
@@ -177,9 +153,10 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
         
-        // Process each observation to find the recognized body pose points.
-//        observations.forEach { processObservation($0) }
         
+        guard !observations.isEmpty else {
+            return
+        }
         
         let plankpointNames: [VNHumanBodyPoseObservation.JointName] = [
             .leftAnkle,
@@ -192,17 +169,11 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             .root
         ]
         
-        let rawPointsName = observations.flatMap{ result in
-            result.availableJointNames
-                .filter{plankpointNames.contains($0.self)}
-        }
         
-        let normalizedPoints = observations.flatMap { result in
-            result.availableJointNames
+        let normalizedPoints = observations.first!.availableJointNames
                 .filter{plankpointNames.contains($0.self)}
-                .compactMap { try? result.recognizedPoint($0) }
+                .compactMap { try? observations.first!.recognizedPoint($0) }
                 .filter { $0.confidence > 0.1 }
-        }
         
         let upsideDownPoints = normalizedPoints.map { $0.location(in: self.cameraFrame!) }
 
@@ -213,28 +184,19 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             )
         }
         
-        
-        if let correctionResult = correction(Dictionary(uniqueKeysWithValues: zip(rawPointsName, points))) {
-            self.audioService.giveFeedback(correctionResult)
-        }
-        
-        print("\n\n\n🌍observeImagePoints\n")
-        print(points)
-        
-        if points.count > 0 {
-            frameCount += 1 
+        frameCount += 1
+        if frameCount % 60 == 0 {
             
-//            DispatchQueue.main.async {
-            // Only update every 3 frames (adjust as needed)
-                if frameCount % 2 == 0 {
-                    self.cameraFrame = self.cameraFrame?.draw(
-                        points: points,
-                        fillColor: .red,
-                        strokeColor: .green
-                    )
-                }
-//            }
+            let observationsPointNames = processObservations(
+                observations,
+                for: plankpointNames
+            )
+            
+            if let correctionResult = correction(observationsPointNames) {
+                self.audioService.giveFeedback(correctionResult)
+            }
         }
+        
         
     }
 
@@ -255,39 +217,30 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         }()
         
     
-       guard let upLeg: CGPoint? = {
+       let upLeg: CGPoint? = {
             if isRightHeadDirection {
                 return result[.rightHip]
             }
            return result[.leftHip]
-        }(),
+        }()
+        
         let leg: CGPoint? = {
             if isRightHeadDirection {
                 return result[.rightKnee]
             }
             return result[.leftKnee]
-        }(),
+        }()
+        
         let foot: CGPoint? = {
             if isRightHeadDirection {
                 return result[.rightAnkle]
             }
             return result[.leftAnkle]
-        }() else {
-            return nil
-        }
+        }()
         
-        if upLeg == nil {
+        guard (upLeg != nil), (leg != nil), (foot != nil) else {
             return nil
         }
-//        let leftUpleg = result["VNRecognizedPointKey(_rawValue: left_upLeg_joint)"]!
-//        let rightUpleg = result["VNRecognizedPointKey(_rawValue: right_upLeg_joint)"]!
-//        let leftLeg = result["VNRecognizedPointKey(_rawValue: left_leg_joint)"]!
-//        let rightLeg = result["VNRecognizedPointKey(_rawValue: right_leg_joint)"]!
-//        let leftFoot = result["VNRecognizedPointKey(_rawValue: left_foot_joint)"]!
-//        let rightFoot = result["VNRecognizedPointKey(_rawValue: right_foot_joint)"]!
-//        
-//        
-
         
         
         
@@ -298,7 +251,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             ankle: foot!
         )
         
-        func evaluatePlank(neck: CGPoint, root: CGPoint, knee: CGPoint, ankle: CGPoint, thetaIdeal: Double = 0, toleranceMin: Double = 5, toleranceMax: Double = 7) -> PlankCondition {
+        func evaluatePlank(neck: CGPoint, root: CGPoint, knee: CGPoint, ankle: CGPoint, thetaIdeal: Double = 0, toleranceMin: Double = 4, toleranceMax: Double = 10) -> PlankCondition {
             // Calculate the relative angle to the horizontal
             let angle1 = calculateAngle(x1: neck.x, y1: neck.y, x2: root.x, y2: root.y)
             let angle2 = calculateAngle(x1: knee.x, y1: knee.y, x2: ankle.x, y2: ankle.y)
@@ -397,6 +350,28 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
          return image
     }
     
+    // Function to get the normalized point for a specific joint
+    func getNormalizedPoint(from observation: VNHumanBodyPoseObservation, for joint: VNHumanBodyPoseObservation.JointName) -> CGPoint? {
+        guard let tempResult = try? observation.recognizedPoint(joint), tempResult.confidence > 0.1 else {
+            return nil
+        }
+        let upsideDownPoint = tempResult.location(in: self.cameraFrame!)
+        return upsideDownPoint.translateFromCoreImageToUIKitCoordinateSpace(using: self.cameraFrame!.size.height)
+    }
+
+    // Function to process observations and extract the points
+    func processObservations(_ observations: [VNHumanBodyPoseObservation], for joints: [VNHumanBodyPoseObservation.JointName]) -> [VNHumanBodyPoseObservation.JointName: CGPoint] {
+        return observations.flatMap { observation in
+            observation.availableJointNames.compactMap { joint -> (VNHumanBodyPoseObservation.JointName, CGPoint)? in
+                guard joints.contains(joint), let normalizedPoint = getNormalizedPoint(from: observation, for: joint) else {
+                    return nil
+                }
+                return (joint, normalizedPoint)
+            }
+        }.reduce(into: [VNHumanBodyPoseObservation.JointName: CGPoint]()) { dict, pair in
+            dict[pair.0] = pair.1
+        }
+    }
 }
 
 extension CGImagePropertyOrientation {
