@@ -267,11 +267,11 @@ extension Int {
         let tempTimes = self.convertToTimesStr()
         var tempMinutes = "\(tempTimes.1)"
         var tempSeconds = "\(tempTimes.2)"
-        if tempTimes.1 <= 10 {
+        if tempTimes.1 < 10 {
             tempMinutes = "0\(tempTimes.1)"
         }
         
-        if tempTimes.2 <= 10 {
+        if tempTimes.2 < 10 {
             tempSeconds = "0\(tempTimes.2)"
         }
         return "\(tempMinutes):\(tempSeconds)"

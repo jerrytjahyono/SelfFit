@@ -12,8 +12,7 @@ struct PlankFeedback: View {
     
     init(plank: Plank) {
         self.plank = plank
-        self.plank.score = self.calculatePlankScore(repetitionDone: plank.repetitionDone, repetitionEstimated: plank.repetitionEstimated, failureCount: plank.failureCount, tooHigh: plank.tooHighCount, tooLow: plank.tooLowCount)
-        
+        self.plank.calculatePlankScore()
     }
     
     var body: some View {
@@ -23,7 +22,7 @@ struct PlankFeedback: View {
                     HStack {
                         Text("Score")
                         Spacer()
-                        if (plank.score<51){
+                        if (plank.score < 51){
                             Text("\(plank.score)")
                                 .foregroundStyle(.red)
                         }
@@ -110,23 +109,23 @@ struct PlankFeedback: View {
     PlankFeedback(plank: Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: 3000, failureCount: 4, failureDuration: 3000, plankDuration: 2000, rest: 1000,score: 84,totalExerciseDuration: 0))
 }
 
-extension PlankFeedback {
+extension Plank {
     
-    func calculatePlankScore(repetitionDone: Int, repetitionEstimated: Int, failureCount: Int, tooHigh: Int, tooLow: Int)->Int{
+    mutating func calculatePlankScore()->Void{
         
         let penaltyFailure = 5
         let penaltyHigh = 2
         let penaltyLow = 2
         
-        var repsScore = (repetitionDone / repetitionEstimated) * 100
+         var repsScore = (self.repetitionDone / self.repetitionEstimated) * 100
         
-        var penalty = (failureCount * penaltyFailure) + (tooHigh * penaltyHigh) + (tooLow * penaltyLow)
+        var penalty = (self.failureCount * penaltyFailure) + (self.tooHighCount * penaltyHigh) + (self.tooLowCount * penaltyLow)
         
         var score = repsScore - penalty
         
         if score < 0 {
-            return 0
+            score = 0
         }
-        return score
+        self.score = score
     }
 }
