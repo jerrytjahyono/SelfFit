@@ -23,8 +23,7 @@ struct PreparationLegRaisesForm: View {
     
     var body: some View {
         NavigationStack{
-            VStack (alignment: .center) {
-                
+            List{
                 HStack {
                     Text("Repition")
                     Spacer()
@@ -33,11 +32,6 @@ struct PreparationLegRaisesForm: View {
                     Stepper("", value: $repetition, in: 0...100)
                         .labelsHidden()
                 }
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-                
-                Divider()
-                
                 HStack {
                     Text("Set")
                     Spacer()
@@ -46,10 +40,6 @@ struct PreparationLegRaisesForm: View {
                     Stepper("", value: $set, in: 0...100)
                         .labelsHidden()
                 }
-                .padding(.horizontal, 20)
-                
-                Divider()
-                
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Duration")
@@ -93,10 +83,6 @@ struct PreparationLegRaisesForm: View {
                         .pickerStyle(WheelPickerStyle())
                     }
                 }
-                .padding(.horizontal, 20)
-                
-                Divider()
-                
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Rest")
@@ -139,11 +125,7 @@ struct PreparationLegRaisesForm: View {
                         .pickerStyle(WheelPickerStyle())
                     }
                 }
-                .padding(.horizontal, 20)
-                
-                Spacer()
             }
-            .padding()
             .navigationTitle("LegRaise")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

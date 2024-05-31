@@ -24,7 +24,7 @@ class PlankAudioService: ObservableObject {
             print("error when init audio")
         }
     }
-    
+     
     func giveFeedback(_ condition: PlankCondition) -> Void {
 
         let conditionAudio : String = {
