@@ -31,7 +31,9 @@ class PlankCameraService: NSObject, ObservableObject{
     private var isPlayingAudio = false
     private var audioPlayer: AVAudioPlayer?
     
+    private var latestPlankCondition: [Int] = []
     private var frameCount = 0 // New: Frame count to reduce update frequency
+    
     
     // inisiator untuk class `CameraService`
     override init(){
@@ -165,8 +167,14 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             .rightKnee,
             .leftKnee,
             .leftHip,
+            .leftShoulder,
+            .rightShoulder,
+            .rightElbow,
+            .leftElbow,
+            .leftWrist,
+            .rightWrist,
             .rightHip,
-            .root
+            .root,
         ]
         
         
@@ -184,22 +192,188 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             )
         }
         
+        let observationsPointNames = processObservations(
+            observations,
+            for: plankpointNames
+        )
+        
+        // Panggil cek kondsi plank
+        plankDetection(observationsPointNames)
+        
         frameCount += 1
-        if frameCount % 60 == 0 {
+        if frameCount % 30 == 0{
             
-            let observationsPointNames = processObservations(
-                observations,
-                for: plankpointNames
-            )
+            // TODO: Check modus latest condition for update
+            if latestPlankCondition.filter({$0 == 1}).count <= latestPlankCondition.filter({$0 == 0}).count {
+                self.isOnPlankPosition = false
+            }else {
+                self.isOnPlankPosition = true
+            }
+            latestPlankCondition = []
             
-            if let correctionResult = correction(observationsPointNames) {
-                self.audioService.giveFeedback(correctionResult)
+            print("\n\n\nself.isOnPlankPosition\n")
+            print(latestPlankCondition)
+            print(self.isOnPlankPosition)
+            
+            if frameCount % 60 == 0 &&  self.isOnPlankPosition {
+                
+                if let correctionResult = correction(observationsPointNames) {
+                    self.audioService.giveFeedback(correctionResult)
+                }
             }
         }
         
         
     }
+    
+    func plankDetection(_ joinPoints: Dictionary<VNHumanBodyPoseObservation.JointName,CGPoint> ) {
+        print("\n\n\n\n\nplankdetection called")
+        let isHaveRoot = joinPoints[.root] != nil
+        let root = joinPoints[.root] ?? nil
+        
+        guard let neck = joinPoints[.neck] else {
+            self.latestPlankCondition.append(0)
+            return
+        }
+        
+        print("🎾joinPoints")
+        print(joinPoints)
+        
+        let isRightHeadDirection : Bool = {
+            if isHaveRoot {
+                return neck.x > root!.x
+            }else {
+                return neck.x > 0
+            }
+        }()
+        
+        let hand: CGPoint? = {
+            if isRightHeadDirection {
+                return joinPoints[.rightWrist]
+            }
+            return joinPoints[.leftWrist]
+        }()
+        
+        let elbow: CGPoint? = {
+            if isRightHeadDirection {
+                return joinPoints[.rightElbow]
+            }
+            return joinPoints[.leftElbow]
+        }()
+        
+        guard (hand != nil),
+        (elbow != nil) else {
+            self.latestPlankCondition.append(0)
+            return
+        }
+        
 
+        print("foreach")
+        for point in joinPoints {
+            if point.key == .neck || (point.key == .leftElbow || point.key == .rightElbow) || (point.key == .leftWrist || point.key == .rightWrist) {
+                print("1️⃣gaperlu dicek")
+            }else{
+                
+                print("2️⃣lolos dicek")
+                
+                if (point.value.y > hand!.y) || (point.value.y > elbow!.y)  {
+                    print("💥point lebih dari tangan bawah")
+                    print(point)
+                    self.latestPlankCondition.append(0)
+                    return
+                }
+            }
+            
+        }
+        
+        print("s0⭕️")
+       let upLegRoot: CGPoint? = {
+            if isRightHeadDirection {
+                return (joinPoints[.rightHip] ?? joinPoints[.root]) ?? nil
+            }
+           return (joinPoints[.leftHip] ?? joinPoints[.root]) ?? nil
+        }()
+        
+        let leg: CGPoint? = {
+            if isRightHeadDirection {
+                return joinPoints[.rightKnee]
+            }
+            return joinPoints[.leftKnee]
+        }()
+        
+        let foot: CGPoint? = {
+            if isRightHeadDirection {
+                return joinPoints[.rightAnkle]
+            }
+            return joinPoints[.leftAnkle]
+        }()
+      
+        
+        let shoulderNeck: CGPoint? = {
+            if isRightHeadDirection {
+                return (joinPoints[.rightShoulder] ?? joinPoints[.neck]) ?? nil
+            }
+            
+            return (joinPoints[.leftShoulder] ?? joinPoints[.neck]) ?? nil
+        }()
+        
+        
+        print("s1")
+        guard (upLegRoot != nil), (leg != nil), (foot != nil), (shoulderNeck != nil), (hand != nil), (elbow != nil) else {
+            print("❌cancled by: 320 join ga lengkap")
+            self.latestPlankCondition.append(0)
+            return
+        }
+        
+        print("s2")
+        if !calculatePlankPosition(upLegRoot!, leg!, foot!, shoulderNeck!, hand!, elbow!) {
+            print("❌cancled by: 326 plank salah")
+            self.latestPlankCondition.append(0)
+            return
+        }
+        
+        print("sukses cuy✅")
+        self.latestPlankCondition.append(1)
+        
+    }
+   
+    func calculatePlankPosition(_ upLegRoot: CGPoint,_ leg: CGPoint,_ foot: CGPoint,_ shoulderNeck: CGPoint,_ hand: CGPoint,_ elbow: CGPoint) -> Bool{
+        
+        print("called calculatePlankPcc")
+        let tolerance = 120.0
+        
+        guard abs(hand.y - elbow.y) < tolerance,
+            abs(elbow.x - shoulderNeck.x) < tolerance else {
+            print("jarak tangan dan elbow: \(abs(hand.y - elbow.y) < tolerance)")
+            print("jarak elbow dan sholder \(abs(elbow.x - shoulderNeck.x) < tolerance)")
+            return false
+        }
+        return areCollinear(upLegRoot: upLegRoot, leg: leg, foot: foot)
+    }
+    
+    func areCollinear(upLegRoot: CGPoint, leg: CGPoint, foot: CGPoint) -> Bool {
+        let tolerance = 0.2
+        
+        var m1 = Double.infinity
+        var m2 = Double.infinity
+        
+        if (leg.x - upLegRoot.x) != 0 {
+            m1 = (leg.y - upLegRoot.y) / (leg.x - upLegRoot.x)
+        }
+        
+        if (foot.x - leg.x) != 0 {
+            m2 = (foot.y - leg.y) / (foot.x - leg.x)
+        }
+        
+        if abs(m2-m1) > tolerance{
+            print("Lutut nekuk 😘")
+            return false
+        }
+        
+        return true
+    }
+
+    
     func correction(_ result: Dictionary<VNHumanBodyPoseObservation.JointName,CGPoint>) -> PlankCondition? {
         let isHaveRoot = result[.root] != nil
         let root = result[.root] ?? nil
