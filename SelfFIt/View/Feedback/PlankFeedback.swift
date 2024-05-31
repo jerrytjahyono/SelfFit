@@ -65,7 +65,7 @@ struct PlankFeedback: View {
                     HStack {
                         Text("Over Rest Duration")
                         Spacer()
-                        Text(plank.formattedTime(time: plank.overRestDuration))
+                        Text(plank.overRestDuration.convertToMmSs())
                     }
                     HStack {
                         Text("Failure Count")
@@ -75,17 +75,17 @@ struct PlankFeedback: View {
                     HStack {
                         Text("Failure Duration")
                         Spacer()
-                        Text(plank.formattedTime(time: plank.failureDuration))
+                        Text(plank.failureDuration.convertToMmSs())
                     }
                     HStack {
                         Text("Plank Duration")
                         Spacer()
-                        Text(plank.formattedTime(time: plank.plankDuration))
+                        Text(plank.plankDuration.convertToMmSs())
                     }
                     HStack {
                         Text("Rest")
                         Spacer()
-                        Text(plank.formattedTime(time: plank.rest))
+                        Text(plank.rest.convertToMmSs())
                     }
                 }
             }
@@ -96,5 +96,5 @@ struct PlankFeedback: View {
 }
 
 #Preview {
-    PlankFeedback(plank: Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: Date(), failureCount: 4, failureDuration: Date(), plankDuration: Date(), rest: Date(),score: 84))
+    PlankFeedback(plank: Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: 3000, failureCount: 4, failureDuration: 3000, plankDuration: 2000, rest: 1000,score: 84,totalExerciseDuration: 0))
 }

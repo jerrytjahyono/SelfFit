@@ -23,6 +23,7 @@
 		EECAD62B2C002F0600286944 /* LegRaiseExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAD62A2C002F0600286944 /* LegRaiseExercise.swift */; };
 		EEDA256C2C05BF4E0061938D /* PlankAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */; };
 		EEDA257C2C05C36E0061938D /* Audios in Resources */ = {isa = PBXBuildFile; fileRef = EEDA257B2C05C36E0061938D /* Audios */; };
+		EEDBE6162C09D1E2009AA5E8 /* PlankTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDBE6152C09D1E2009AA5E8 /* PlankTimer.swift */; };
 		F95EC5962BFF68CD00164CE7 /* SelfFItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */; };
 		F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5972BFF68CD00164CE7 /* ContentView.swift */; };
 		F95EC59C2BFF68D000164CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F95EC59B2BFF68D000164CE7 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		EECAD62A2C002F0600286944 /* LegRaiseExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseExercise.swift; sourceTree = "<group>"; };
 		EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankAudioService.swift; sourceTree = "<group>"; };
 		EEDA257B2C05C36E0061938D /* Audios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audios; sourceTree = "<group>"; };
+		EEDBE6152C09D1E2009AA5E8 /* PlankTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankTimer.swift; sourceTree = "<group>"; };
 		F95EC5922BFF68CD00164CE7 /* SelfFIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelfFIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfFItApp.swift; sourceTree = "<group>"; };
 		F95EC5972BFF68CD00164CE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */,
 				EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */,
 				EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */,
+				EEDBE6152C09D1E2009AA5E8 /* PlankTimer.swift */,
 			);
 			path = Plank;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEDBE6162C09D1E2009AA5E8 /* PlankTimer.swift in Sources */,
 				F95EC5B92BFF796600164CE7 /* PreparationPlankForm.swift in Sources */,
 				F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */,
 				04840B092BFF946300C7B02C /* Plank.swift in Sources */,
@@ -442,7 +446,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SelfFIt/Preview Content\"";
-				DEVELOPMENT_TEAM = 8K77A3SD3P;
+				DEVELOPMENT_TEAM = 85GYMJ45N9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SelfFIt/Info.plist;
@@ -457,7 +461,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALPtpr;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -476,7 +480,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SelfFIt/Preview Content\"";
-				DEVELOPMENT_TEAM = 8K77A3SD3P;
+				DEVELOPMENT_TEAM = 85GYMJ45N9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SelfFIt/Info.plist;
@@ -491,7 +495,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALPtpr;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
