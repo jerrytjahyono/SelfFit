@@ -19,13 +19,14 @@ struct Plank: Exercise {
     var tooHighCount: Int
     var tooLowCount: Int
     var overRestCount: Int
-    var overRestDuration: Date
+    var overRestDuration: Int
     var failureCount: Int
-    var failureDuration: Date
-    var plankDuration: Date
-    var rest: Date
+    var failureDuration: Int
+    var plankDuration: Int
+    var rest: Int
     var imageName: String = ""
     var score: Int
+    var totalExerciseDuration : Int
     
     var backgroundGradient: Gradient {
         Gradient(colors: [.red, Color("pastelPink")])

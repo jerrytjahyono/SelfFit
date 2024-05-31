@@ -32,7 +32,8 @@ class PlankCameraService: NSObject, ObservableObject{
     private var audioPlayer: AVAudioPlayer?
     
     private var latestPlankCondition: [Int] = []
-    private var frameCount = 0 // New: Frame count to reduce update frequency
+    @Published var isOnRest = false
+    @Published var frameCount = 0 // New: Frame count to reduce update frequency
     
     
     // inisiator untuk class `CameraService`
@@ -124,6 +125,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                         options: [:]
                     )
                     
+                    print(3.convertToTimesStr())
                     
                     // Create a new request to recognize a human body pose.
                     let request = VNDetectHumanBodyPoseRequest(completionHandler: self.bodyPoseHandler
@@ -215,9 +217,9 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             print(latestPlankCondition)
             print(self.isOnPlankPosition)
             
-            if frameCount % 60 == 0 &&  self.isOnPlankPosition {
-                
+            if !isOnRest && (frameCount % 60 == 0 &&  self.isOnPlankPosition) {
                 if let correctionResult = correction(observationsPointNames) {
+                    currentPlankCondition = correctionResult
                     self.audioService.giveFeedback(correctionResult)
                 }
             }
@@ -286,6 +288,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             
         }
         
+        
         print("s0⭕️")
        let upLegRoot: CGPoint? = {
             if isRightHeadDirection {
@@ -352,7 +355,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     func areCollinear(upLegRoot: CGPoint, leg: CGPoint, foot: CGPoint) -> Bool {
-        let tolerance = 0.2
+        let tolerance = 0.3
         
         var m1 = Double.infinity
         var m2 = Double.infinity
@@ -389,6 +392,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                 return neck.x > 0
             }
         }()
+        
         
     
        let upLeg: CGPoint? = {
