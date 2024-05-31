@@ -18,13 +18,11 @@ struct PreparationPlankForm: View {
     @State private var restSeconds: Int = 0
     @State private var showRestPicker: Bool = false
     
-    
   
     
     var body: some View {
         NavigationStack {
-            VStack (alignment: .center) {
-
+            List{
                 HStack {
                     Text("Repition")
                     Spacer()
@@ -33,11 +31,6 @@ struct PreparationPlankForm: View {
                     Stepper("", value: $repetition, in: 0...100)
                        .labelsHidden()
                 }
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-                
-                Divider()
-                
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Duration")
@@ -81,10 +74,6 @@ struct PreparationPlankForm: View {
                         .pickerStyle(WheelPickerStyle())
                     }
                 }
-                .padding(.horizontal, 20)
-                
-                Divider()
-                
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Rest")
@@ -127,16 +116,13 @@ struct PreparationPlankForm: View {
                         .pickerStyle(WheelPickerStyle())
                     }
                 }
-                .padding(.horizontal, 20)
-                Spacer()
             }
-            .padding()
             .navigationTitle("Plank")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink("Next"){
-                        PlankExercise(plankData: Plank(repetitionEstimated: self.repetition, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: (durationMinutes * 60) + restSeconds, rest: (restMinutes * 60) + restSeconds,score: 0, totalExerciseDuration: 0))
+                        PlankExercise()
                     }
                 }
             }

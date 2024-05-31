@@ -7,8 +7,9 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
-struct LegRaise: Exercise {
+class LegRaise: Exercise {
     var id: String = UUID().uuidString
     var date: Date = Date()
     var set: Int
@@ -17,6 +18,17 @@ struct LegRaise: Exercise {
     var rest: String
     var imageName: String = ""
     var score: Int = 90
+    
+    init(id: String, date: Date, set: Int, repetition: Int, duration: String, rest: String, imageName: String, score: Int) {
+        self.id = id
+        self.date = date
+        self.set = set
+        self.repetition = repetition
+        self.duration = duration
+        self.rest = rest
+        self.imageName = imageName
+        self.score = score
+    }
     
     var backgroundGradient: Gradient {
         Gradient(colors: [.blue, Color("lightBlue")])
