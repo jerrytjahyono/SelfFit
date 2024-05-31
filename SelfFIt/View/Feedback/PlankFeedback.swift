@@ -10,6 +10,12 @@ import SwiftUI
 struct PlankFeedback: View {
     var plank: Plank
     
+    init(plank: Plank) {
+        self.plank = plank
+        self.plank.score = self.calculatePlankScore(repetitionDone: plank.repetitionDone, repetitionEstimated: plank.repetitionEstimated, failureCount: plank.failureCount, tooHigh: plank.tooHighCount, tooLow: plank.tooLowCount)
+        
+    }
+    
     var body: some View {
         NavigationStack{
             List {
@@ -37,6 +43,11 @@ struct PlankFeedback: View {
                     }
                 }
                 Section(header: Text("Record")) {
+                    HStack {
+                        Text("Total Duration")
+                        Spacer()
+                        Text("\(plank.totalExerciseDuration)")
+                    }
                     HStack {
                         Text("Repetition Estimated")
                         Spacer()
@@ -97,4 +108,25 @@ struct PlankFeedback: View {
 
 #Preview {
     PlankFeedback(plank: Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: 3000, failureCount: 4, failureDuration: 3000, plankDuration: 2000, rest: 1000,score: 84,totalExerciseDuration: 0))
+}
+
+extension PlankFeedback {
+    
+    func calculatePlankScore(repetitionDone: Int, repetitionEstimated: Int, failureCount: Int, tooHigh: Int, tooLow: Int)->Int{
+        
+        let penaltyFailure = 5
+        let penaltyHigh = 2
+        let penaltyLow = 2
+        
+        var repsScore = (repetitionDone / repetitionEstimated) * 100
+        
+        var penalty = (failureCount * penaltyFailure) + (tooHigh * penaltyHigh) + (tooLow * penaltyLow)
+        
+        var score = repsScore - penalty
+        
+        if score < 0 {
+            return 0
+        }
+        return score
+    }
 }
