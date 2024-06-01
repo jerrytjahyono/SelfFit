@@ -14,10 +14,11 @@ struct HistoryList: View {
     
     
     @Query(sort:\Plank.date) private var planks: [Plank]
+//    @Query(sort:\LegRaise.date) private var legRaises: [LegRaise]
+
     private var legRaises = [
-    LegRaise(set: 0, repetition: 0, duration: "0", rest: "0", score: 0),
-    LegRaise(set: 0, repetition: 0, duration: "0", rest: "0", score: 0),
-    LegRaise(set: 0, repetition: 0, duration: "0", rest: "0", score: 0),
+        LegRaise(setEstimated: 0, setDone: 0, repetitionEstimated: 0, repetitionDone: 0, upTrackCount: 0, bentCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, legRaiseDuration: 0, rest: 0, score: 0, totalExerciseDuration: 0),
+        LegRaise(setEstimated: 0, setDone: 0, repetitionEstimated: 0, repetitionDone: 0, upTrackCount: 0, bentCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, legRaiseDuration: 0, rest: 0, score: 0, totalExerciseDuration: 0)
     ]
     
     var body: some View {

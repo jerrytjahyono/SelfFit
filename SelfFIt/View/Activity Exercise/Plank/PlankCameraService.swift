@@ -17,6 +17,8 @@ class PlankCameraService: NSObject, ObservableObject{
     @Published var cameraFrame: UIImage?
     @Published var isOnPlankPosition: Bool = false
     @Published var currentPlankCondition: PlankCondition?
+    @Published var tooHighCount = 0
+    @Published var tooLowCount = 0
     
     // Variabel yang akan bertanggung jawab dalam menangkap serta mengkordinasi data dari output input camera secara streaming
     private let captureSession = AVCaptureSession()
@@ -125,7 +127,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                         options: [:]
                     )
                     
-                    print(3.convertToTimesStr())
+//                    print(3.convertToTimesStr())
                     
                     // Create a new request to recognize a human body pose.
                     let request = VNDetectHumanBodyPoseRequest(completionHandler: self.bodyPoseHandler
@@ -213,13 +215,18 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             }
             latestPlankCondition = []
             
-            print("\n\n\nself.isOnPlankPosition\n")
-            print(latestPlankCondition)
-            print(self.isOnPlankPosition)
+//            print("\n\n\nself.isOnPlankPosition\n")
+//            print(latestPlankCondition)
+//            print(self.isOnPlankPosition)
             
             if !isOnRest && (frameCount % 60 == 0 &&  self.isOnPlankPosition) {
                 if let correctionResult = correction(observationsPointNames) {
                     currentPlankCondition = correctionResult
+                    if currentPlankCondition == .tooHigh {
+                        self.tooHighCount += 1
+                    }else if currentPlankCondition == .tooLow {
+                        self.tooLowCount += 1
+                    }
                     self.audioService.giveFeedback(correctionResult)
                 }
             }
@@ -229,7 +236,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     func plankDetection(_ joinPoints: Dictionary<VNHumanBodyPoseObservation.JointName,CGPoint> ) {
-        print("\n\n\n\n\nplankdetection called")
+//        print("\n\n\n\n\nplankdetection called")
         let isHaveRoot = joinPoints[.root] != nil
         let root = joinPoints[.root] ?? nil
         
@@ -238,8 +245,8 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
         
-        print("🎾joinPoints")
-        print(joinPoints)
+//        print("🎾joinPoints")
+//        print(joinPoints)
         
         let isRightHeadDirection : Bool = {
             if isHaveRoot {
@@ -270,17 +277,17 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
 
-        print("foreach")
+//        print("foreach")
         for point in joinPoints {
             if point.key == .neck || (point.key == .leftElbow || point.key == .rightElbow) || (point.key == .leftWrist || point.key == .rightWrist) {
-                print("1️⃣gaperlu dicek")
+//                print("1️⃣gaperlu dicek")
             }else{
                 
-                print("2️⃣lolos dicek")
+//                print("2️⃣lolos dicek")
                 
                 if (point.value.y > hand!.y) || (point.value.y > elbow!.y)  {
-                    print("💥point lebih dari tangan bawah")
-                    print(point)
+//                    print("💥point lebih dari tangan bawah")
+//                    print(point)
                     self.latestPlankCondition.append(0)
                     return
                 }
@@ -288,8 +295,8 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             
         }
         
-        
-        print("s0⭕️")
+//        
+//        print("s0⭕️")
        let upLegRoot: CGPoint? = {
             if isRightHeadDirection {
                 return (joinPoints[.rightHip] ?? joinPoints[.root]) ?? nil
@@ -321,34 +328,34 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         }()
         
         
-        print("s1")
+//        print("s1")
         guard (upLegRoot != nil), (leg != nil), (foot != nil), (shoulderNeck != nil), (hand != nil), (elbow != nil) else {
-            print("❌cancled by: 320 join ga lengkap")
+//            print("❌cancled by: 320 join ga lengkap")
             self.latestPlankCondition.append(0)
             return
         }
         
-        print("s2")
+//        print("s2")
         if !calculatePlankPosition(upLegRoot!, leg!, foot!, shoulderNeck!, hand!, elbow!) {
-            print("❌cancled by: 326 plank salah")
+//            print("❌cancled by: 326 plank salah")
             self.latestPlankCondition.append(0)
             return
         }
         
-        print("sukses cuy✅")
+//        print("sukses cuy✅")
         self.latestPlankCondition.append(1)
         
     }
    
     func calculatePlankPosition(_ upLegRoot: CGPoint,_ leg: CGPoint,_ foot: CGPoint,_ shoulderNeck: CGPoint,_ hand: CGPoint,_ elbow: CGPoint) -> Bool{
         
-        print("called calculatePlankPcc")
+//        print("called calculatePlankPcc")
         let tolerance = 120.0
         
         guard abs(hand.y - elbow.y) < tolerance,
             abs(elbow.x - shoulderNeck.x) < tolerance else {
-            print("jarak tangan dan elbow: \(abs(hand.y - elbow.y) < tolerance)")
-            print("jarak elbow dan sholder \(abs(elbow.x - shoulderNeck.x) < tolerance)")
+//            print("jarak tangan dan elbow: \(abs(hand.y - elbow.y) < tolerance)")
+//            print("jarak elbow dan sholder \(abs(elbow.x - shoulderNeck.x) < tolerance)")
             return false
         }
         return areCollinear(upLegRoot: upLegRoot, leg: leg, foot: foot)
@@ -369,7 +376,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
         if abs(m2-m1) > tolerance{
-            print("Lutut nekuk 😘")
+//            print("Lutut nekuk 😘")
             return false
         }
         
@@ -442,9 +449,9 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
             let angleDiffDeg = angle1Deg - angle2Deg
             
             // Debug information
-            print("Angle 1 (degrees): \(angle1Deg)")
-            print("Angle 2 (degrees): \(angle2Deg)")
-            print("Angle difference (degrees): \(angleDiffDeg)")
+//            print("Angle 1 (degrees): \(angle1Deg)")
+//            print("Angle 2 (degrees): \(angle2Deg)")
+//            print("Angle difference (degrees): \(angleDiffDeg)")
             
             // Determine the evaluation based on the desired position (thetaIdeal) and tolerance range
             if angleDiffDeg > thetaIdeal + toleranceMax {
@@ -500,8 +507,8 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
         // Draw the points onscreen.
-        print("\n\n\n🩷imagePoints\n")
-        print(imagePoints)
+//        print("\n\n\n🩷imagePoints\n")
+//        print(imagePoints)
 //        
 //        self.cameraFrame = self.cameraFrame?.draw(
 //            points: imagePoints,

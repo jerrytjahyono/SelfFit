@@ -12,6 +12,7 @@ class PlankTimer: ObservableObject {
     @Published var restTimer = 0
     @Published var overRestDuration = 0
     @Published var failureDuration = 0
+    private var overRestDelay = 0
     
     var timer = Timer()
     
@@ -39,13 +40,22 @@ class PlankTimer: ObservableObject {
     
     
     func startOverRestTimer() -> Void {
+        print("inside start overRestTimer")
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            self.overRestDuration += 1
+            if self.overRestDelay > 7{
+                self.overRestDelay = 0
+                self.overRestDuration += 1
+            }else {
+                self.overRestDelay += 1
+            }
         }
     }
     
     func stopOverRestTimer() -> Void {
-        timer.invalidate()
+        print("inside stop overRestTimer")
+        if timer.isValid {
+            timer.invalidate()
+        }
     }
     
     func startFailureTimer() -> Void {

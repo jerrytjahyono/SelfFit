@@ -34,18 +34,22 @@ struct ExerciseHome: View {
                 if path.count == 2 && plank.repetitionEstimated > 0  {
                                     PlankExercise(plankData: plank)
                                     { plankResult in
+                                        print("💢path.count")
+                                        print(path.count)
                                         path.removeLast(path.count)
+                                        print(path.count)
                                         path.append(plankResult)
+                                        print(path.count)
                                     }
-                                        .onAppear{
-                                            print(plank.repetitionEstimated)
-                                            print("🦠\(path.count)")
-                                            print("🦠\(path.count)")
-                                            print("🦠\(path.count)")
-                                            print("🦠\(path.count)")
-                                            print("🦠\(path.count)")
-                                            print("🦠\(path.count)")
-                                        }
+//                                        .onAppear{
+//                                            print(plank.repetitionEstimated)
+//                                            print("🦠\(path.count)")
+//                                            print("🦠\(path.count)")
+//                                            print("🦠\(path.count)")
+//                                            print("🦠\(path.count)")
+//                                            print("🦠\(path.count)")
+//                                            print("🦠\(path.count)")
+//                                        }
 
                                 }
 
@@ -54,14 +58,14 @@ struct ExerciseHome: View {
                                         path.append(formPlank)
 
                                     }
-                                        .onAppear{
-                                            print(plank.repetitionEstimated)
-                                        print("coook \(path.count)")
-                                    }
+//                                        .onAppear{
+//                                            print(plank.repetitionEstimated)
+//                                        print("coook \(path.count)")
+//                                    }
 
                                 }
 
-                                if path.count < 2 && plank.repetitionEstimated > 1{
+                                if path.count < 2 && plank.repetitionEstimated >= 1{
                                     PlankFeedback(plank: plank)
                                 }
             }
