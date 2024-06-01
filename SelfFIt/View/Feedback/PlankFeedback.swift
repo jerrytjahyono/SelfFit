@@ -9,15 +9,8 @@ import SwiftUI
 
 struct PlankFeedback: View {
     var plank: Plank
-    
-    init(plank: Plank) {
-        self.plank = plank
-        self.plank.score = self.calculatePlankScore(repetitionDone: plank.repetitionDone, repetitionEstimated: plank.repetitionEstimated, failureCount: plank.failureCount, tooHigh: plank.tooHighCount, tooLow: plank.tooLowCount)
-        
-    }
-    
+
     var body: some View {
-        NavigationStack{
             List {
                 Section(header: Text("Exercise Finished")){
                     HStack {
@@ -102,7 +95,6 @@ struct PlankFeedback: View {
             }
             .navigationTitle(plank.displayExercise())
             .navigationBarTitleDisplayMode(.inline)
-        }
     }
 }
 
