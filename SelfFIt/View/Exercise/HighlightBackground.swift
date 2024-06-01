@@ -17,6 +17,6 @@ struct HighlightBackground: View {
     }
 }
 
-#Preview {
-    HighlightBackground(exercise: LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12", score: 0))
-}
+//#Preview {
+//    HighlightBackground(exercise: LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12", score: 0))
+//}

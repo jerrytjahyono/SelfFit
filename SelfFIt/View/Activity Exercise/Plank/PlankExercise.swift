@@ -39,78 +39,78 @@ struct PlankExercise: View {
 
     @StateObject var timerPlank = PlankTimer()
     @State var timer = Timer()
+    @State var imageFrame: UIImage?
+    
+    private let overRestTimerQueue = DispatchQueue.init(label: "OversestTimer.service", qos: .utility)
     
     var body: some View {
 
             ZStack {
-                if let frame = cameraService.cameraFrame {
-                    Image(uiImage: frame)
+                if let frame = imageFrame {
+                    Image(uiImage: imageFrame!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
                     .frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
+                    .onReceive(self.cameraService.$cameraFrame, perform: { currentFrame in
+                        self.imageFrame = currentFrame
+                    })
                     .onChange(of: frame){
-                        
-                        if self.exerciseStatus == .finish {
-                            exerciseStatus = .finish
-                            isFinishedExercise = true
-                            timerPlank.finishExercise()
-                            finishExerciseDataPrepare()
-                        }
-                        
-                        if self.cameraService.frameCount % 61 == 0 {
-                            switch cameraService.currentPlankCondition {
-                            case .tooHigh:
-                                self.plankData.tooHighCount += 1
-                            case .tooLow:
-                                self.plankData.tooLowCount += 1
-                            default: break
+                        if self.cameraService.frameCount % 11 == 0 {
+                            
+                            if self.exerciseStatus == .finish {
+                                exerciseStatus = .finish
+                                isFinishedExercise = true
+                                timerPlank.finishExercise()
+                                finishExerciseDataPrepare()
+                            }
+                            
+                            if exerciseStatus == .firstTime && cameraService.isOnPlankPosition{
+                                exerciseStatus = .active
+                                // TODO: Turn on the exercise timer
+                                self.timerPlank.startExerciseTimer()
+                            }
+                            
+                            if exerciseStatus == .failure && cameraService.isOnPlankPosition{
+                                self.cameraService.isOnRest = false
+                                exerciseStatus = .active
+                                timerPlank.stopFailureTimer()
+                                timerPlank.startExerciseTimer()
+                            }
+                            
+                            if exerciseStatus == .overRest && cameraService.isOnPlankPosition {
+                                self.cameraService.isOnRest = false
+                                exerciseStatus = .active
+                                timerPlank.stopOverRestTimer()
+                                timerPlank.startExerciseTimer()
                             }
                         }
-                        
-                        if exerciseStatus == .firstTime && cameraService.isOnPlankPosition{
-                            exerciseStatus = .active
-                            // TODO: Turn on the exercise timer
-                            self.timerPlank.startExerciseTimer()
-                        }
-                        
-                        if exerciseStatus == .failure && cameraService.isOnPlankPosition{
-                            self.cameraService.isOnRest = false
-                            exerciseStatus = .active
-                            timerPlank.stopFailureTimer()
-                            timerPlank.startExerciseTimer()
-                        }
-                        
-                        if exerciseStatus == .overRest && cameraService.isOnPlankPosition {
-                            self.cameraService.isOnRest = false
-                            exerciseStatus = .active
-                            timerPlank.stopOverRestTimer()
-                            timerPlank.startExerciseTimer()
-                        }
-                    
                     }
                     
                                
                 } else {
                     Text("Please wait opening your camera....")
+                        .onReceive(self.cameraService.$cameraFrame, perform: { currentFrame in
+                            self.imageFrame = currentFrame
+                        })
                 }
                        VStack(alignment: .leading) {
                            Spacer()
                            HStack(){
-                               NavigationLink(value: plankData) {
                                    Button("Stop"){
+                                       print("clicked")
                                        finishExerciseDataPrepare()
+                                       plankData.calculatePlankScore()
+                                       context.insert(plankData)
+                                       pushView(plankData)
                                    }
-                                       .foregroundStyle(Color(.red).opacity(isTimerRunning ? 0 : 0.5))
+                                       .foregroundStyle(Color(.red).opacity(isTimerRunning ? 0 : 1))
                                         .padding(.vertical,8)
                                         .padding(.horizontal,12)
                                         .background(Color(.red).opacity(0.2))
-                                        .buttonStyle(.bordered)
                                         .clipShape(.buttonBorder)
-                               }.disabled(
-                                self.exerciseStatus != .failure || self.exerciseStatus != .overRest || self.exerciseStatus != .rest || self.exerciseStatus != .finish
-                               )
+                                        .disabled(self.exerciseStatus == .firstTime)
                            }
                            .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
                            
@@ -215,13 +215,11 @@ struct PlankExercise: View {
             exerciseStatus = .overRest
             self.timerPlank.restTimer = 0
             self.timerPlank.stopRestTimer()
-            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 7){
                 if exerciseStatus == .overRest {
-                    print("inside start overRestTimer")
+                    self.plankData.overRestCount += 1
                     print(exerciseStatus)
                     self.timerPlank.startOverRestTimer()
                 }
-            }
         }
         
     }
@@ -236,14 +234,18 @@ struct PlankExercise: View {
             isFinishedExercise = true
             timerPlank.finishExercise()
             finishExerciseDataPrepare()
+            plankData.calculatePlankScore()
+            print(plankData)
             context.insert(plankData)
             pushView(plankData)
         }
     }
     
     func finishExerciseDataPrepare() -> Void {
-        self.plankData.overRestCount = self.timerPlank.overRestDuration
+        self.plankData.overRestDuration = self.timerPlank.overRestDuration
         self.plankData.failureDuration = self.timerPlank.failureDuration
+        self.plankData.tooLowCount = self.cameraService.tooLowCount
+        self.plankData.tooHighCount = self.cameraService.tooHighCount
         self.plankData.totalExerciseDuration = ( self.plankData.plankDuration * self.plankData.repetitionEstimated
         )
         if self.plankData.repetitionDone < self.plankData.repetitionEstimated { 
