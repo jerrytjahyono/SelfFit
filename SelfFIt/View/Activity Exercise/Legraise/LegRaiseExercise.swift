@@ -19,18 +19,25 @@ struct LegRaiseExercise: View {
     @StateObject var cameraService = LegRaiseCameraService()
     @State private var timer: Timer?
     
+    @State var imageFrame: UIImage?
     var body: some View {
         NavigationStack {
             ZStack {
-                if let frame = cameraService.cameraFrame {
-                    Image(decorative: frame, scale: 1, orientation: .down)
-                               .resizable()
-                               .aspectRatio(contentMode: .fill)
-                               .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
-                               .frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-                               .edgesIgnoringSafeArea(.all)
+                if let frame = imageFrame {
+                    Image(uiImage: frame)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity)
+                    .frame(minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .onReceive(self.cameraService.$cameraFrame, perform: { currentFrame in
+                        self.imageFrame = currentFrame
+                    })
                 } else {
                     Text("Please wait opening your camera....")
+                        .onReceive(self.cameraService.$cameraFrame, perform: { currentFrame in
+                            self.imageFrame = currentFrame
+                        })
                 }
                        VStack(alignment: .leading) {
                            Spacer()

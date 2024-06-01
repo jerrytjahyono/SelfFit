@@ -27,6 +27,7 @@ class PlankCameraService: NSObject, ObservableObject{
     // Thread untuk menjalankan camera
     private let captureQueue = DispatchQueue.init(label: "Camera.service", qos: .userInitiated)
     
+    
     private var cgImageFrame: CGImage?
 
     private var audioService = PlankAudioService()
@@ -139,7 +140,7 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                         
                         guard let results = request.results,
                               let result = results.first else { return }
-                        
+
                     } catch {
                         print("Unable to perform the request: \(error).")
                     }
@@ -231,7 +232,6 @@ extension PlankCameraService: AVCaptureVideoDataOutputSampleBufferDelegate {
                 }
             }
         }
-        
         
     }
     
