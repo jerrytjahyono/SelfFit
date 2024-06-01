@@ -16,7 +16,6 @@ struct PlankFeedback: View {
     }
     
     var body: some View {
-        NavigationStack{
             List {
                 Section(header: Text("Exercise Finished")){
                     HStack {
@@ -101,7 +100,6 @@ struct PlankFeedback: View {
             }
             .navigationTitle(plank.displayExercise())
             .navigationBarTitleDisplayMode(.inline)
-        }
     }
 }
 
