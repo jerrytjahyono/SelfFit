@@ -17,6 +17,7 @@
 		04840B092BFF946300C7B02C /* Plank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B082BFF946300C7B02C /* Plank.swift */; };
 		04840B0B2BFF946D00C7B02C /* LegRaise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B0A2BFF946D00C7B02C /* LegRaise.swift */; };
 		04840B0F2BFF980E00C7B02C /* LegRaiseFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B0E2BFF980E00C7B02C /* LegRaiseFeedback.swift */; };
+		EE5104F72C0B717100F4F623 /* LegraiseDetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */; };
 		EEA9C1D52BFFD3950083BC9A /* PlankCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */; };
 		EEA9C1D72BFFD3B10083BC9A /* PlankExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */; };
 		EECAD6272C002EB700286944 /* LegRaiseCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAD6262C002EB700286944 /* LegRaiseCameraService.swift */; };
@@ -45,6 +46,7 @@
 		04840B082BFF946300C7B02C /* Plank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plank.swift; sourceTree = "<group>"; };
 		04840B0A2BFF946D00C7B02C /* LegRaise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaise.swift; sourceTree = "<group>"; };
 		04840B0E2BFF980E00C7B02C /* LegRaiseFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseFeedback.swift; sourceTree = "<group>"; };
+		EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = LegraiseDetection.mlmodel; sourceTree = "<group>"; };
 		EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankCameraService.swift; sourceTree = "<group>"; };
 		EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankExercise.swift; sourceTree = "<group>"; };
 		EECAD6262C002EB700286944 /* LegRaiseCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseCameraService.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		F95EC5942BFF68CD00164CE7 /* SelfFIt */ = {
 			isa = PBXGroup;
 			children = (
+				EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */,
 				EEDA257B2C05C36E0061938D /* Audios */,
 				F95EC5A52BFF696500164CE7 /* Info.plist */,
 				F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */,
@@ -294,6 +297,7 @@
 				EEDBE6162C09D1E2009AA5E8 /* PlankTimer.swift in Sources */,
 				F95EC5B92BFF796600164CE7 /* PreparationPlankForm.swift in Sources */,
 				F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */,
+				EE5104F72C0B717100F4F623 /* LegraiseDetection.mlmodel in Sources */,
 				04840B092BFF946300C7B02C /* Plank.swift in Sources */,
 				F95EC5A72BFF6CEB00164CE7 /* HistoryList.swift in Sources */,
 				041715622C005D9D00DFF76F /* HighlightBackground.swift in Sources */,
@@ -446,7 +450,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SelfFIt/Preview Content\"";
-				DEVELOPMENT_TEAM = 8K77A3SD3P;
+				DEVELOPMENT_TEAM = 85GYMJ45N9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SelfFIt/Info.plist;
@@ -461,7 +465,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALPtper;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -480,7 +484,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SelfFIt/Preview Content\"";
-				DEVELOPMENT_TEAM = 8K77A3SD3P;
+				DEVELOPMENT_TEAM = 85GYMJ45N9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SelfFIt/Info.plist;
@@ -495,7 +499,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALPtper;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
