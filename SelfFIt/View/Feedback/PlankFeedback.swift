@@ -9,9 +9,8 @@ import SwiftUI
 
 struct PlankFeedback: View {
     var plank: Plank
-    
+ 
     var body: some View {
-        NavigationStack{
             List {
                 Section(header: Text("Exercise Finished")){
                     HStack {
@@ -91,7 +90,6 @@ struct PlankFeedback: View {
             }
             .navigationTitle(plank.displayExercise())
             .navigationBarTitleDisplayMode(.inline)
-        }
     }
 }
 

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PreparationPlankForm: View {
+    @State var plankData: Plank
+    let pushNextView : (Plank) -> Void
+    
     @State private var repetition: Int = 0
     // state for duration
     @State private var durationMinutes: Int = 0
@@ -22,14 +25,15 @@ struct PreparationPlankForm: View {
   
     
     var body: some View {
-        NavigationStack {
             VStack (alignment: .center) {
-
                 HStack {
                     Text("Repition")
                     Spacer()
                     Text("\(repetition)")
                        .padding(.horizontal, 4)
+                       .onChange(of: repetition){
+                           plankData.repetitionEstimated = repetition
+                       }
                     Stepper("", value: $repetition, in: 0...100)
                        .labelsHidden()
                 }
@@ -44,7 +48,6 @@ struct PreparationPlankForm: View {
                         Spacer()
                         Text(String(format: "%02d:%02d", durationMinutes, durationSeconds))
                             .padding(.horizontal)
-                            
                     }
                     .onTapGesture {
                         showDurationPicker.toggle()
@@ -91,7 +94,7 @@ struct PreparationPlankForm: View {
                         Spacer()
                         Text(String(format: "%02d:%02d", restMinutes, restSeconds))
                             .padding(.horizontal)
-                            
+                        
                     }
                     .onTapGesture {
                         showRestPicker.toggle()
@@ -135,15 +138,20 @@ struct PreparationPlankForm: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink("Next"){
-                        PlankExercise(plankData: Plank(repetitionEstimated: self.repetition, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: (durationMinutes * 60) + restSeconds, rest: (restMinutes * 60) + restSeconds,score: 0, totalExerciseDuration: 0))
+                    Button("Next"){
+                        plankData.plankDuration  = (durationMinutes * 60 ) + durationSeconds
+                        
+                        plankData.rest = (restMinutes * 60 ) + restSeconds
+                        
+                        pushNextView(plankData)
                     }
                 }
             }
-        }
     }
 }
 
 #Preview {
-    PreparationPlankForm()
+    PreparationPlankForm(plankData: Plank(repetitionEstimated: 0, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: 0, rest: 0, score: 0, totalExerciseDuration: 0)){ _ in
+        
+    }
 }

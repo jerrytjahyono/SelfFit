@@ -15,10 +15,12 @@ enum ExerciseStatus {
 
 struct PlankExercise: View {
     @State package var plankData: Plank
-    init(plankData: Plank) {
+    init(plankData: Plank, pushView: @escaping (Plank) -> Void) {
         self.plankData = plankData
+        self.pushView = pushView
     }
     
+    let pushView: (Plank) -> Void
     @State private var exerciseStatus: ExerciseStatus = .firstTime
     @State private var isFinishedExercise = false
     
@@ -37,7 +39,7 @@ struct PlankExercise: View {
     @State var timer = Timer()
     
     var body: some View {
-        NavigationStack {
+
             ZStack {
                 if let frame = cameraService.cameraFrame {
                     Image(uiImage: frame)
@@ -94,7 +96,7 @@ struct PlankExercise: View {
                        VStack(alignment: .leading) {
                            Spacer()
                            HStack(){
-                               NavigationLink(destination: PlankFeedback(plank: self.plankData), isActive: $isFinishedExercise) {
+                               NavigationLink(value: plankData) {
                                    Button("Stop"){
                                        finishExerciseDataPrepare()
                                    }
@@ -146,8 +148,6 @@ struct PlankExercise: View {
                             .onChange(of: repetition, perform: repetitionCountOnChange)
                     }
                 }
-            }
-            
             }
         }
     
@@ -234,7 +234,7 @@ struct PlankExercise: View {
             isFinishedExercise = true
             timerPlank.finishExercise()
             finishExerciseDataPrepare()
-            
+            pushView(plankData)
         }
     }
     
@@ -254,7 +254,9 @@ struct PlankExercise: View {
     }
 
 #Preview {
-    PlankExercise(plankData: Plank(repetitionEstimated: 2, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: 10, rest: 12,score: 78, totalExerciseDuration: 0))
+    PlankExercise(plankData: Plank(repetitionEstimated: 2, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: 10, rest: 12,score: 78, totalExerciseDuration: 0)){ _ in
+        
+    }
 }
 
 extension Int {
