@@ -44,7 +44,7 @@ class LegRaise: Exercise {
         self.failureDuration = failureDuration
         self.legRaiseDuration = legRaiseDuration
         self.rest = rest
-        self.imageName = ""
+        self.imageName = "LegRaiseIcon"
         self.score = score
         self.totalExerciseDuration = totalExerciseDuration
         
@@ -66,7 +66,7 @@ class LegRaise: Exercise {
         self.failureDuration = failureDuration
         self.legRaiseDuration = legRaiseDuration
         self.rest = rest
-        self.imageName = ""
+        self.imageName = "LegRaiseIcon"
         self.score = score
         self.totalExerciseDuration = totalExerciseDuration
     }

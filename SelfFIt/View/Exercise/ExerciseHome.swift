@@ -21,7 +21,7 @@ struct ExerciseHome: View {
                 }
                 Section(header: Text("Exercises").foregroundStyle(.black)){
                     NavigationLink(value: Plank(repetitionEstimated: 0, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: 0, rest: 0, score: 0, totalExerciseDuration: 0)){
-                        ExerciseRow(title: "Plank", image: "")
+                        ExerciseRow(title: "Plank", image: "PlankIcon")
                     }
                     
                     /// Temporary Disable: for v0.2.0

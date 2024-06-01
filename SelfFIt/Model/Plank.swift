@@ -41,7 +41,7 @@ class Plank: Exercise {
         self.failureDuration = failureDuration
         self.plankDuration = plankDuration
         self.rest = rest
-        self.imageName = ""
+        self.imageName = "PlankIcon"
         self.score = score
         self.totalExerciseDuration = totalExerciseDuration
         
@@ -60,7 +60,7 @@ class Plank: Exercise {
         self.failureDuration = failureDuration
         self.plankDuration = plankDuration
         self.rest = rest
-        self.imageName = ""
+        self.imageName = "PlankIcon"
         self.score = score
         self.totalExerciseDuration = totalExerciseDuration
     }
