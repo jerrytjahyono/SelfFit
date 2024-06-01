@@ -12,7 +12,7 @@ import SwiftData
     struct SelfFItApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            
+            Plank.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

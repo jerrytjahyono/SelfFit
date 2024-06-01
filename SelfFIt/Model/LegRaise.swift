@@ -19,14 +19,20 @@ class LegRaise: Exercise {
     var imageName: String = ""
     var score: Int = 90
     
-    init(id: String, date: Date, set: Int, repetition: Int, duration: String, rest: String, imageName: String, score: Int) {
-        self.id = id
-        self.date = date
+    init( set: Int, repetition: Int, duration: String, rest: String, imageName: String, score: Int) {
         self.set = set
         self.repetition = repetition
         self.duration = duration
         self.rest = rest
         self.imageName = imageName
+        self.score = score
+    }
+    
+    init( set: Int, repetition: Int, duration: String, rest: String, score: Int) {
+        self.set = set
+        self.repetition = repetition
+        self.duration = duration
+        self.rest = rest
         self.score = score
     }
     

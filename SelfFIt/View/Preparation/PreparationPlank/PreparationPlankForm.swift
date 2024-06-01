@@ -24,101 +24,101 @@ struct PreparationPlankForm: View {
   
     
     var body: some View {
-            VStack (alignment: .center) {
-                HStack {
-                    Text("Repition")
-                    Spacer()
-                    Text("\(repetition)")
-                       .padding(.horizontal, 4)
-                       .onChange(of: repetition){
-                           plankData.repetitionEstimated = repetition
-                       }
-                    Stepper("", value: $repetition, in: 0...100)
-                       .labelsHidden()
-                }
-                VStack(alignment: .leading) {
+            ScrollView{
+                VStack (alignment: .center) {
                     HStack {
-                        Text("Duration")
+                        Text("Repition")
                         Spacer()
-                        Text(String(format: "%02d:%02d", durationMinutes, durationSeconds))
-                            .padding(.horizontal)
+                        Text("\(repetition)")
+                           .padding(.horizontal, 4)
+                        Stepper("", value: $repetition, in: 0...100)
+                           .labelsHidden()
                     }
-                    .onTapGesture {
-                        showDurationPicker.toggle()
-                    }
-                    .padding(.vertical)
-                    if showDurationPicker {
+                    VStack(alignment: .leading) {
                         HStack {
-                            VStack {
-                                Text("Minutes")
-                                    .font(.body)
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color.gray)
-                                
-                                Picker("Minutes", selection: $durationMinutes) {
-                                    ForEach(0..<60) { minute in
-                                        Text("\(minute)")
-                                    }
-                                }
-                            }
-                            
-                            VStack {
-                                Text("Seconds")
-                                    .font(.body)
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color.gray)
-                                Picker("Seconds", selection: $durationSeconds) {
-                                    ForEach(0..<60) { second in
-                                        Text("\(second)")
-                                    }
-                                }
-                            }
-                            
+                            Text("Duration")
+                            Spacer()
+                            Text(String(format: "%02d:%02d", durationMinutes, durationSeconds))
+                                .padding(.horizontal)
                         }
-                        .pickerStyle(WheelPickerStyle())
-                    }
-                }
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Rest")
-                        Spacer()
-                        Text(String(format: "%02d:%02d", restMinutes, restSeconds))
-                            .padding(.horizontal)
-                        
-                    }
-                    .onTapGesture {
-                        showRestPicker.toggle()
-                    }
-                    .padding(.vertical)
-                    if showRestPicker {
-                        HStack {
-                            VStack {
-                                Text("Minutes")
-                                    .font(.body)
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color.gray)
-                                Picker("Minutes", selection: $restMinutes) {
-                                    ForEach(0..<60) { minute in
-                                        Text("\(minute)")
-                                    }
-                                }
-                            }
-                            
-                            VStack {
-                                Text("Seconds")
-                                    .font(.body)
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color.gray)
-                                Picker("Seconds", selection: $restSeconds) {
-                                    ForEach(0..<60) { second in
-                                        Text("\(second)")
-                                    }
+                        .onTapGesture {
+                            showDurationPicker.toggle()
+                        }
+                        .padding(.vertical)
+                        if showDurationPicker {
+                            HStack {
+                                VStack {
+                                    Text("Minutes")
+                                        .font(.body)
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color.gray)
                                     
+                                    Picker("Minutes", selection: $durationMinutes) {
+                                        ForEach(0..<60) { minute in
+                                            Text("\(minute)")
+                                        }
+                                    }
+                                }
+                                
+                                VStack {
+                                    Text("Seconds")
+                                        .font(.body)
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color.gray)
+                                    Picker("Seconds", selection: $durationSeconds) {
+                                        ForEach(0..<60) { second in
+                                            Text("\(second)")
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                        }
+                    }
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Rest")
+                            Spacer()
+                            Text(String(format: "%02d:%02d", restMinutes, restSeconds))
+                                .padding(.horizontal)
+                            
+                        }
+                        .onTapGesture {
+                            showRestPicker.toggle()
+                        }
+                        .padding(.vertical)
+                        if showRestPicker {
+                            HStack {
+                                VStack {
+                                    Text("Minutes")
+                                        .font(.body)
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color.gray)
+                                    Picker("Minutes", selection: $restMinutes) {
+                                        ForEach(0..<60) { minute in
+                                            Text("\(minute)")
+                                        }
+                                    }
+                                }
+                                
+                                VStack {
+                                    Text("Seconds")
+                                        .font(.body)
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color.gray)
+                                    Picker("Seconds", selection: $restSeconds) {
+                                        ForEach(0..<60) { second in
+                                            Text("\(second)")
+                                        }
+                                        
+                                    }
                                 }
                             }
+                            .pickerStyle(WheelPickerStyle())
                         }
-                        .pickerStyle(WheelPickerStyle())
                     }
+                    Spacer()
                 }
             }
             .navigationTitle("Plank")
@@ -126,11 +126,9 @@ struct PreparationPlankForm: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Next"){
-                        plankData.plankDuration  = (durationMinutes * 60 ) + durationSeconds
                         
-                        plankData.rest = (restMinutes * 60 ) + restSeconds
                         
-                        pushNextView(plankData)
+                        pushNextView(Plank(repetitionEstimated: repetition, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: ( (durationMinutes * 60 ) + durationSeconds), rest: ((restMinutes * 60 ) + restSeconds), score: 0, totalExerciseDuration: 0))
 
                     }
                 }

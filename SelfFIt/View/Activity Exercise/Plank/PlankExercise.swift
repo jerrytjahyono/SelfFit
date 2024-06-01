@@ -236,6 +236,7 @@ struct PlankExercise: View {
             isFinishedExercise = true
             timerPlank.finishExercise()
             finishExerciseDataPrepare()
+            context.insert(plankData)
             pushView(plankData)
         }
     }
