@@ -21,7 +21,6 @@ struct PreparationPlankForm: View {
     @State private var restSeconds: Int = 0
     @State private var showRestPicker: Bool = false
     
-    
   
     
     var body: some View {
@@ -37,11 +36,6 @@ struct PreparationPlankForm: View {
                     Stepper("", value: $repetition, in: 0...100)
                        .labelsHidden()
                 }
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
-                
-                Divider()
-                
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Duration")
@@ -84,10 +78,6 @@ struct PreparationPlankForm: View {
                         .pickerStyle(WheelPickerStyle())
                     }
                 }
-                .padding(.horizontal, 20)
-                
-                Divider()
-                
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Rest")
@@ -130,10 +120,7 @@ struct PreparationPlankForm: View {
                         .pickerStyle(WheelPickerStyle())
                     }
                 }
-                .padding(.horizontal, 20)
-                Spacer()
             }
-            .padding()
             .navigationTitle("Plank")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -144,6 +131,7 @@ struct PreparationPlankForm: View {
                         plankData.rest = (restMinutes * 60 ) + restSeconds
                         
                         pushNextView(plankData)
+
                     }
                 }
             }

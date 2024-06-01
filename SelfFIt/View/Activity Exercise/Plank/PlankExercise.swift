@@ -14,11 +14,13 @@ enum ExerciseStatus {
 }
 
 struct PlankExercise: View {
+    @Environment(\.modelContext) private var context
     @State package var plankData: Plank
     init(plankData: Plank, pushView: @escaping (Plank) -> Void) {
         self.plankData = plankData
         self.pushView = pushView
     }
+
     
     let pushView: (Plank) -> Void
     @State private var exerciseStatus: ExerciseStatus = .firstTime
@@ -258,6 +260,7 @@ struct PlankExercise: View {
         
     }
 }
+
 
 extension Int {
     

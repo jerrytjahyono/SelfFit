@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-protocol Exercise: Codable, Identifiable, Hashable{
+protocol Exercise{
     var id: String { get }
     var date: Date { get }
     var imageName: String { get }
