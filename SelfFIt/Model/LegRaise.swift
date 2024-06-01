@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+@Model
 class LegRaise: Exercise {
     var id: String = UUID().uuidString
     var date: Date = Date()
@@ -21,12 +22,12 @@ class LegRaise: Exercise {
     
     init(id: String, date: Date, set: Int, repetition: Int, duration: String, rest: String, imageName: String, score: Int) {
         self.id = id
-        self.date = date
+        self.date = Date()
         self.set = set
         self.repetition = repetition
         self.duration = duration
         self.rest = rest
-        self.imageName = imageName
+        self.imageName = ""
         self.score = score
     }
     

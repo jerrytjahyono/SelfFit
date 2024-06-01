@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 protocol Exercise{
     var id: String { get }
@@ -17,7 +18,4 @@ protocol Exercise{
     
     func displayExercise() -> String
     func formattedDate() -> String
-    
-    
-    
 }

@@ -54,6 +54,6 @@ struct LegRaiseFeedback: View {
     }
 }
 
-#Preview {
-    LegRaiseFeedback(legRaise: LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12"))
-}
+//#Preview {
+//    LegRaiseFeedback(legRaise: LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12"))
+//}

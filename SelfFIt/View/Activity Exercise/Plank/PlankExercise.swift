@@ -8,6 +8,7 @@
 import SwiftUI
 import AVFAudio
 import AVFoundation
+import SwiftData
 
 enum ExerciseStatus {
     case firstTime, active, rest, overRest, failure, finish
@@ -15,6 +16,7 @@ enum ExerciseStatus {
 
 struct PlankExercise: View {
     @Environment(\.modelContext) private var context
+    
     @State package var plankData: Plank
     init(plankData: Plank) {
         self.plankData = plankData
@@ -94,7 +96,7 @@ struct PlankExercise: View {
                        VStack(alignment: .leading) {
                            Spacer()
                            HStack(){
-                               NavigationLink(destination: PlankFeedback(plank: self.plankData), isActive: $isFinishedExercise) {
+                               NavigationLink(destination: PlankFeedback(plank: self.plankData, context: context), isActive: $isFinishedExercise) {
                                    Button("Stop"){
                                        finishExerciseDataPrepare()
                                    }

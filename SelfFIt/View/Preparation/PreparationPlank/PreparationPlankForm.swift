@@ -18,7 +18,8 @@ struct PreparationPlankForm: View {
     @State private var restSeconds: Int = 0
     @State private var showRestPicker: Bool = false
     
-  
+    @Environment(\.modelContext) private var context
+
     
     var body: some View {
         NavigationStack {
@@ -122,7 +123,7 @@ struct PreparationPlankForm: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink("Next"){
-                        PlankExercise()
+                        PlankExercise(plankData: Plank(repetitionEstimated: self.repetition, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: (durationMinutes * 60) + restSeconds, rest: (restMinutes * 60) + restSeconds,score: 0, totalExerciseDuration: 0, context: context))
                     }
                 }
             }

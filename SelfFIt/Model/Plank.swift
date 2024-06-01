@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+@Model
 class Plank: Exercise {
     var id: String
     var date: Date
@@ -45,6 +46,25 @@ class Plank: Exercise {
         self.totalExerciseDuration = totalExerciseDuration
         
         context.insert(self)
+    }
+    
+    init(id: String, date: Date, repetitionEstimated: Int, repetitionDone: Int, tooHighCount: Int, tooLowCount: Int, overRestCount: Int, overRestDuration: Int, failureCount: Int, failureDuration: Int, plankDuration: Int, rest: Int, score: Int, totalExerciseDuration: Int) {
+        self.id = id
+        self.date = date
+        self.repetitionEstimated = repetitionEstimated
+        self.repetitionDone = repetitionDone
+        self.tooHighCount = tooHighCount
+        self.tooLowCount = tooLowCount
+        self.overRestCount = overRestCount
+        self.overRestDuration = overRestDuration
+        self.failureCount = failureCount
+        self.failureDuration = failureDuration
+        self.plankDuration = plankDuration
+        self.rest = rest
+        self.imageName = ""
+        self.score = score
+        self.totalExerciseDuration = totalExerciseDuration
+
     }
     
     var backgroundGradient: Gradient {

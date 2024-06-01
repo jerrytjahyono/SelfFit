@@ -6,15 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PlankFeedback: View {
     var plank: Plank
     
+    init(plank: Plank, context: ModelContext) {
+        self.plank = plank
+        self.plank.score = self.calculatePlankScore(repetitionDone: plank.repetitionDone, repetitionEstimated: plank.repetitionEstimated, failureCount: plank.failureCount, tooHigh: plank.tooHighCount, tooLow: plank.tooLowCount)
+    }
+    
     init(plank: Plank) {
         self.plank = plank
         self.plank.score = self.calculatePlankScore(repetitionDone: plank.repetitionDone, repetitionEstimated: plank.repetitionEstimated, failureCount: plank.failureCount, tooHigh: plank.tooHighCount, tooLow: plank.tooLowCount)
-        
     }
+
+    
     
     var body: some View {
         NavigationStack{
@@ -106,9 +113,9 @@ struct PlankFeedback: View {
     }
 }
 
-#Preview {
-    PlankFeedback(plank: Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: 3000, failureCount: 4, failureDuration: 3000, plankDuration: 2000, rest: 1000,score: 84,totalExerciseDuration: 0))
-}
+//#Preview {
+//    PlankFeedback(plank: Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: 3000, failureCount: 4, failureDuration: 3000, plankDuration: 2000, rest: 1000,score: 84,totalExerciseDuration: 0))
+//}
 
 extension PlankFeedback {
     

@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HighlightView: View {
+      
+//    var exercises: [any Exercise] = [
+//        LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12"),
+//        Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: 3500, failureCount: 4, failureDuration: 7000, plankDuration: 53300, rest: 1200,score: 84,totalExerciseDuration: 0)
+//    ]
     
-    var exercises: [any Exercise] = [
-        LegRaise(set: 4, repetition: 4, duration: "08:00", rest: "05:12"),
-        Plank(repetitionEstimated: 4, repetitionDone: 4, tooHighCount: 3, tooLowCount: 2, overRestCount: 3, overRestDuration: 3500, failureCount: 4, failureDuration: 7000, plankDuration: 53300, rest: 1200,score: 84,totalExerciseDuration: 0)
-    ]
+//    @Query private var exercises: [Exercise]
     
     var body: some View {
         VStack (alignment: .leading){
@@ -40,7 +43,7 @@ struct HighlightView: View {
                     }
                 }
             }
-//            .frame(height: 185)
+            .frame(height: 185)
         }
     }
 }

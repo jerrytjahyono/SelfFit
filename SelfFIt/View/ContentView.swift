@@ -17,6 +17,10 @@ struct ContentView: View {
         case history
     }
     
+    @Environment(\.modelContext) private var modelContext
+    @Query private var plank: [Plank]
+//    @Query private var exercises: [Exercise]
+    
     var body: some View {
         
         TabView(selection: $selection) {
