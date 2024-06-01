@@ -6,11 +6,6 @@
 //
 
 import SwiftUI
-enum Screen: Hashable, Decodable {
-    case plankPreparation
-    case plankExercise(Plank)
-    case plankFeedback(Plank)
-}
 
 struct ExerciseHome: View {
     @State private var path = NavigationPath()
@@ -37,36 +32,38 @@ struct ExerciseHome: View {
             }
             .navigationDestination(for: Plank.self){ plank in
                 if path.count == 2 && plank.repetitionEstimated > 0  {
-                    PlankExercise(plankData: plank)
-                    { plankResult in
-                        path.removeLast(path.count)
-                        path.append(plankResult)
-                    }
-                        .onAppear{
-                            print("🦠\(path.count)")
-                            print("🦠\(path.count)")
-                            print("🦠\(path.count)")
-                            print("🦠\(path.count)")
-                            print("🦠\(path.count)")
-                            print("🦠\(path.count)")
-                        }
-                    
-                }
-                
-                if path.count < 2 && plank.repetitionEstimated < 1{
-                    PreparationPlankForm(plankData: plank){ formPlank in
-                        path.append(formPlank)
-                        
-                    }
-                        .onAppear{
-                        print("coook \(path.count)")
-                    }
-                    
-                }
-                
-                if path.count < 2 && plank.repetitionEstimated > 1{
-                    PlankFeedback(plank: plank)
-                }
+                                    PlankExercise(plankData: plank)
+                                    { plankResult in
+                                        path.removeLast(path.count)
+                                        path.append(plankResult)
+                                    }
+                                        .onAppear{
+                                            print(plank.repetitionEstimated)
+                                            print("🦠\(path.count)")
+                                            print("🦠\(path.count)")
+                                            print("🦠\(path.count)")
+                                            print("🦠\(path.count)")
+                                            print("🦠\(path.count)")
+                                            print("🦠\(path.count)")
+                                        }
+
+                                }
+
+                                if path.count < 2 && plank.repetitionEstimated < 1{
+                                    PreparationPlankForm(plankData: plank){ formPlank in
+                                        path.append(formPlank)
+
+                                    }
+                                        .onAppear{
+                                            print(plank.repetitionEstimated)
+                                        print("coook \(path.count)")
+                                    }
+
+                                }
+
+                                if path.count < 2 && plank.repetitionEstimated > 1{
+                                    PlankFeedback(plank: plank)
+                                }
             }
             .navigationTitle("Home")
             .listStyle(.inset)

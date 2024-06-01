@@ -16,7 +16,7 @@ struct PlankFeedback: View {
                     HStack {
                         Text("Score")
                         Spacer()
-                        if (plank.score<51){
+                        if (plank.score < 51){
                             Text("\(plank.score)")
                                 .foregroundStyle(.red)
                         }
