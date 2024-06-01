@@ -23,11 +23,13 @@ struct ExerciseHome: View {
                     NavigationLink(value: Plank(repetitionEstimated: 0, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: 0, rest: 0, score: 0, totalExerciseDuration: 0)){
                         ExerciseRow(title: "Plank", image: "")
                     }
-                    NavigationLink{
-                        PreparationLegRaisesForm()
-                    } label:{
-                        ExerciseRow(title: "Leg Raise", image: "")
-                    }
+                    
+                    /// Temporary Disable: for v0.2.0
+//                    NavigationLink{
+//                        PreparationLegRaisesForm()
+//                    } label:{
+//                        ExerciseRow(title: "Leg Raise", image: "")
+//                    }
                 }
             }
             .navigationDestination(for: Plank.self){ plank in
@@ -41,15 +43,6 @@ struct ExerciseHome: View {
                                         path.append(plankResult)
                                         print(path.count)
                                     }
-//                                        .onAppear{
-//                                            print(plank.repetitionEstimated)
-//                                            print("🦠\(path.count)")
-//                                            print("🦠\(path.count)")
-//                                            print("🦠\(path.count)")
-//                                            print("🦠\(path.count)")
-//                                            print("🦠\(path.count)")
-//                                            print("🦠\(path.count)")
-//                                        }
 
                                 }
 
@@ -58,11 +51,6 @@ struct ExerciseHome: View {
                                         path.append(formPlank)
 
                                     }
-//                                        .onAppear{
-//                                            print(plank.repetitionEstimated)
-//                                        print("coook \(path.count)")
-//                                    }
-
                                 }
 
                                 if path.count < 2 && plank.repetitionEstimated >= 1{
