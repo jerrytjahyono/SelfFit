@@ -12,7 +12,7 @@ class PlankTimer: ObservableObject {
     @Published var restTimer = 0
     @Published var overRestDuration = 0
     @Published var failureDuration = 0
-    private var overRestDelay = 0
+    @Published var overRestDelay = 0
     
     var timer = Timer()
     

@@ -82,6 +82,9 @@ struct PlankExercise: View {
                             if exerciseStatus == .overRest && cameraService.isOnPlankPosition {
                                 self.cameraService.isOnRest = false
                                 exerciseStatus = .active
+                                if self.timerPlank.overRestDelay == 0 {
+                                    self.plankData.overRestCount += 1
+                                }
                                 timerPlank.stopOverRestTimer()
                                 timerPlank.startExerciseTimer()
                             }
@@ -216,8 +219,6 @@ struct PlankExercise: View {
             self.timerPlank.restTimer = 0
             self.timerPlank.stopRestTimer()
                 if exerciseStatus == .overRest {
-                    self.plankData.overRestCount += 1
-                    print(exerciseStatus)
                     self.timerPlank.startOverRestTimer()
                 }
         }

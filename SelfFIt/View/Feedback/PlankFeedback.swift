@@ -19,8 +19,7 @@ struct PlankFeedback: View {
                     if (plank.score < 51){
                         Text("\(plank.score)")
                             .foregroundStyle(.red)
-                    }
-                    else{
+                    }else{
                         Text("\(plank.score)")
                     }
                 }
@@ -39,7 +38,7 @@ struct PlankFeedback: View {
                 HStack {
                     Text("Total Duration")
                     Spacer()
-                    Text("\(plank.totalExerciseDuration)")
+                    Text("\(plank.totalExerciseDuration.convertToMmSs())")
                 }
                 HStack {
                     Text("Repetition Estimated")
