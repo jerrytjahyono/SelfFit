@@ -9,10 +9,11 @@ import SwiftUI
 import SwiftData
 
 @main
-struct SelfFItApp: App {
+    struct SelfFItApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            
+            Plank.self,
+            LegRaise.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

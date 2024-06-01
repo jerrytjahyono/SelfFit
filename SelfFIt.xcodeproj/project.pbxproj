@@ -7,16 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041715602C0057D200DFF76F /* HighlightItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417155F2C0057D200DFF76F /* HighlightItem.swift */; };
+		041715622C005D9D00DFF76F /* HighlightBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041715612C005D9D00DFF76F /* HighlightBackground.swift */; };
+		0463508D2BFF7C0A00F68CBD /* HighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463508C2BFF7C0A00F68CBD /* HighlightView.swift */; };
+		046350912BFF808B00F68CBD /* ExerciseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046350902BFF808B00F68CBD /* ExerciseRow.swift */; };
+		046350932BFF848600F68CBD /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046350922BFF848600F68CBD /* HistoryRow.swift */; };
+		04840B052BFF744800C7B02C /* PlankFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B042BFF744800C7B02C /* PlankFeedback.swift */; };
+		04840B072BFF93FA00C7B02C /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B062BFF93FA00C7B02C /* Exercise.swift */; };
+		04840B092BFF946300C7B02C /* Plank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B082BFF946300C7B02C /* Plank.swift */; };
+		04840B0B2BFF946D00C7B02C /* LegRaise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B0A2BFF946D00C7B02C /* LegRaise.swift */; };
+		04840B0F2BFF980E00C7B02C /* LegRaiseFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B0E2BFF980E00C7B02C /* LegRaiseFeedback.swift */; };
+		EE5104F72C0B717100F4F623 /* LegraiseDetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */; };
+		EEA9C1D52BFFD3950083BC9A /* PlankCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */; };
+		EEA9C1D72BFFD3B10083BC9A /* PlankExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */; };
+		EECAD6272C002EB700286944 /* LegRaiseCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAD6262C002EB700286944 /* LegRaiseCameraService.swift */; };
+		EECAD62B2C002F0600286944 /* LegRaiseExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECAD62A2C002F0600286944 /* LegRaiseExercise.swift */; };
+		EEDA256C2C05BF4E0061938D /* PlankAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */; };
+		EEDA257C2C05C36E0061938D /* Audios in Resources */ = {isa = PBXBuildFile; fileRef = EEDA257B2C05C36E0061938D /* Audios */; };
+		EEDBE6162C09D1E2009AA5E8 /* PlankTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDBE6152C09D1E2009AA5E8 /* PlankTimer.swift */; };
 		F95EC5962BFF68CD00164CE7 /* SelfFItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */; };
 		F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5972BFF68CD00164CE7 /* ContentView.swift */; };
 		F95EC59C2BFF68D000164CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F95EC59B2BFF68D000164CE7 /* Assets.xcassets */; };
 		F95EC59F2BFF68D000164CE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F95EC59E2BFF68D000164CE7 /* Preview Assets.xcassets */; };
 		F95EC5A72BFF6CEB00164CE7 /* HistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5A62BFF6CEB00164CE7 /* HistoryList.swift */; };
 		F95EC5AB2BFF6D6800164CE7 /* ExerciseHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5AA2BFF6D6800164CE7 /* ExerciseHome.swift */; };
-		F95EC5B02BFF6DBE00164CE7 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5AF2BFF6DBE00164CE7 /* History.swift */; };
+		F95EC5B92BFF796600164CE7 /* PreparationPlankForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5B82BFF796600164CE7 /* PreparationPlankForm.swift */; };
+		F95EC5BE2BFF958800164CE7 /* PreparationLegRaisesForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95EC5BD2BFF958800164CE7 /* PreparationLegRaisesForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0417155F2C0057D200DFF76F /* HighlightItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightItem.swift; sourceTree = "<group>"; };
+		041715612C005D9D00DFF76F /* HighlightBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightBackground.swift; sourceTree = "<group>"; };
+		0463508C2BFF7C0A00F68CBD /* HighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightView.swift; sourceTree = "<group>"; };
+		046350902BFF808B00F68CBD /* ExerciseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRow.swift; sourceTree = "<group>"; };
+		046350922BFF848600F68CBD /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
+		04840B042BFF744800C7B02C /* PlankFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankFeedback.swift; sourceTree = "<group>"; };
+		04840B062BFF93FA00C7B02C /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		04840B082BFF946300C7B02C /* Plank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plank.swift; sourceTree = "<group>"; };
+		04840B0A2BFF946D00C7B02C /* LegRaise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaise.swift; sourceTree = "<group>"; };
+		04840B0E2BFF980E00C7B02C /* LegRaiseFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseFeedback.swift; sourceTree = "<group>"; };
+		EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = LegraiseDetection.mlmodel; sourceTree = "<group>"; };
+		EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankCameraService.swift; sourceTree = "<group>"; };
+		EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankExercise.swift; sourceTree = "<group>"; };
+		EECAD6262C002EB700286944 /* LegRaiseCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseCameraService.swift; sourceTree = "<group>"; };
+		EECAD62A2C002F0600286944 /* LegRaiseExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseExercise.swift; sourceTree = "<group>"; };
+		EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankAudioService.swift; sourceTree = "<group>"; };
+		EEDA257B2C05C36E0061938D /* Audios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audios; sourceTree = "<group>"; };
+		EEDBE6152C09D1E2009AA5E8 /* PlankTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankTimer.swift; sourceTree = "<group>"; };
 		F95EC5922BFF68CD00164CE7 /* SelfFIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelfFIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfFItApp.swift; sourceTree = "<group>"; };
 		F95EC5972BFF68CD00164CE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -25,7 +62,8 @@
 		F95EC5A52BFF696500164CE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F95EC5A62BFF6CEB00164CE7 /* HistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryList.swift; sourceTree = "<group>"; };
 		F95EC5AA2BFF6D6800164CE7 /* ExerciseHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHome.swift; sourceTree = "<group>"; };
-		F95EC5AF2BFF6DBE00164CE7 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		F95EC5B82BFF796600164CE7 /* PreparationPlankForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparationPlankForm.swift; sourceTree = "<group>"; };
+		F95EC5BD2BFF958800164CE7 /* PreparationLegRaisesForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparationLegRaisesForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +77,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04840B032BFF73ED00C7B02C /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				04840B042BFF744800C7B02C /* PlankFeedback.swift */,
+				04840B0E2BFF980E00C7B02C /* LegRaiseFeedback.swift */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		EEA9C1D22BFFD3590083BC9A /* Activity Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				EECAD6252C002E8200286944 /* Legraise */,
+				EEA9C1D32BFFD3680083BC9A /* Plank */,
+			);
+			path = "Activity Exercise";
+			sourceTree = "<group>";
+		};
+		EEA9C1D32BFFD3680083BC9A /* Plank */ = {
+			isa = PBXGroup;
+			children = (
+				EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */,
+				EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */,
+				EEDA256B2C05BF4E0061938D /* PlankAudioService.swift */,
+				EEDBE6152C09D1E2009AA5E8 /* PlankTimer.swift */,
+			);
+			path = Plank;
+			sourceTree = "<group>";
+		};
+		EECAD6252C002E8200286944 /* Legraise */ = {
+			isa = PBXGroup;
+			children = (
+				EECAD6262C002EB700286944 /* LegRaiseCameraService.swift */,
+				EECAD62A2C002F0600286944 /* LegRaiseExercise.swift */,
+			);
+			path = Legraise;
+			sourceTree = "<group>";
+		};
 		F95EC5892BFF68CD00164CE7 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +134,8 @@
 		F95EC5942BFF68CD00164CE7 /* SelfFIt */ = {
 			isa = PBXGroup;
 			children = (
+				EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */,
+				EEDA257B2C05C36E0061938D /* Audios */,
 				F95EC5A52BFF696500164CE7 /* Info.plist */,
 				F95EC5952BFF68CD00164CE7 /* SelfFItApp.swift */,
 				F95EC5AE2BFF6DA400164CE7 /* Model */,
@@ -80,6 +158,10 @@
 			isa = PBXGroup;
 			children = (
 				F95EC5AA2BFF6D6800164CE7 /* ExerciseHome.swift */,
+				046350902BFF808B00F68CBD /* ExerciseRow.swift */,
+				0463508C2BFF7C0A00F68CBD /* HighlightView.swift */,
+				0417155F2C0057D200DFF76F /* HighlightItem.swift */,
+				041715612C005D9D00DFF76F /* HighlightBackground.swift */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";
@@ -88,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				F95EC5A62BFF6CEB00164CE7 /* HistoryList.swift */,
+				046350922BFF848600F68CBD /* HistoryRow.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -95,7 +178,9 @@
 		F95EC5AE2BFF6DA400164CE7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F95EC5AF2BFF6DBE00164CE7 /* History.swift */,
+				04840B062BFF93FA00C7B02C /* Exercise.swift */,
+				04840B0A2BFF946D00C7B02C /* LegRaise.swift */,
+				04840B082BFF946300C7B02C /* Plank.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -104,10 +189,38 @@
 			isa = PBXGroup;
 			children = (
 				F95EC5972BFF68CD00164CE7 /* ContentView.swift */,
+				EEA9C1D22BFFD3590083BC9A /* Activity Exercise */,
+				F95EC5B42BFF778600164CE7 /* Preparation */,
+				04840B032BFF73ED00C7B02C /* Feedback */,
 				F95EC5AC2BFF6D7600164CE7 /* Exercise */,
 				F95EC5AD2BFF6D9000164CE7 /* History */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F95EC5B42BFF778600164CE7 /* Preparation */ = {
+			isa = PBXGroup;
+			children = (
+				F95EC5BC2BFF950000164CE7 /* PreparationLegRaises */,
+				F95EC5B52BFF779800164CE7 /* PreparationPlank */,
+			);
+			path = Preparation;
+			sourceTree = "<group>";
+		};
+		F95EC5B52BFF779800164CE7 /* PreparationPlank */ = {
+			isa = PBXGroup;
+			children = (
+				F95EC5B82BFF796600164CE7 /* PreparationPlankForm.swift */,
+			);
+			path = PreparationPlank;
+			sourceTree = "<group>";
+		};
+		F95EC5BC2BFF950000164CE7 /* PreparationLegRaises */ = {
+			isa = PBXGroup;
+			children = (
+				F95EC5BD2BFF958800164CE7 /* PreparationLegRaisesForm.swift */,
+			);
+			path = PreparationLegRaises;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +283,7 @@
 			files = (
 				F95EC59F2BFF68D000164CE7 /* Preview Assets.xcassets in Resources */,
 				F95EC59C2BFF68D000164CE7 /* Assets.xcassets in Resources */,
+				EEDA257C2C05C36E0061938D /* Audios in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,11 +294,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F95EC5B02BFF6DBE00164CE7 /* History.swift in Sources */,
+				EEDBE6162C09D1E2009AA5E8 /* PlankTimer.swift in Sources */,
+				F95EC5B92BFF796600164CE7 /* PreparationPlankForm.swift in Sources */,
 				F95EC5982BFF68CD00164CE7 /* ContentView.swift in Sources */,
+				EE5104F72C0B717100F4F623 /* LegraiseDetection.mlmodel in Sources */,
+				04840B092BFF946300C7B02C /* Plank.swift in Sources */,
 				F95EC5A72BFF6CEB00164CE7 /* HistoryList.swift in Sources */,
+				041715622C005D9D00DFF76F /* HighlightBackground.swift in Sources */,
+				EEA9C1D52BFFD3950083BC9A /* PlankCameraService.swift in Sources */,
+				046350912BFF808B00F68CBD /* ExerciseRow.swift in Sources */,
+				0463508D2BFF7C0A00F68CBD /* HighlightView.swift in Sources */,
+				046350932BFF848600F68CBD /* HistoryRow.swift in Sources */,
 				F95EC5962BFF68CD00164CE7 /* SelfFItApp.swift in Sources */,
+				F95EC5BE2BFF958800164CE7 /* PreparationLegRaisesForm.swift in Sources */,
 				F95EC5AB2BFF6D6800164CE7 /* ExerciseHome.swift in Sources */,
+				04840B0B2BFF946D00C7B02C /* LegRaise.swift in Sources */,
+				EEA9C1D72BFFD3B10083BC9A /* PlankExercise.swift in Sources */,
+				04840B072BFF93FA00C7B02C /* Exercise.swift in Sources */,
+				041715602C0057D200DFF76F /* HighlightItem.swift in Sources */,
+				EECAD6272C002EB700286944 /* LegRaiseCameraService.swift in Sources */,
+				EECAD62B2C002F0600286944 /* LegRaiseExercise.swift in Sources */,
+				04840B0F2BFF980E00C7B02C /* LegRaiseFeedback.swift in Sources */,
+				04840B052BFF744800C7B02C /* PlankFeedback.swift in Sources */,
+				EEDA256C2C05BF4E0061938D /* PlankAudioService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,11 +450,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SelfFIt/Preview Content\"";
-				DEVELOPMENT_TEAM = D9248U2U3P;
+				DEVELOPMENT_TEAM = 85GYMJ45N9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SelfFIt/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access camera to track your exercise";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -333,7 +465,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFIt;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -352,11 +484,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SelfFIt/Preview Content\"";
-				DEVELOPMENT_TEAM = D9248U2U3P;
+				DEVELOPMENT_TEAM = 85GYMJ45N9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SelfFIt/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access camera to track your exercise";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -367,7 +499,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFIt;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.SelfFItALP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
