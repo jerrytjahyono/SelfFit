@@ -8,8 +8,59 @@
 import SwiftUI
 
 struct ExerciseHome: View {
+    @State private var path = NavigationPath()
+    
     var body: some View {
-        Text("This is Home!")
+        NavigationStack(path: $path){
+            List{
+                Section{
+                    HighlightView()
+                        .listRowInsets(EdgeInsets())
+                        .padding(.top, 10)
+                        .listRowSeparator(.hidden)
+                }
+                Section(header: Text("Exercises").foregroundStyle(.black)){
+                    NavigationLink(value: Plank(repetitionEstimated: 0, repetitionDone: 0, tooHighCount: 0, tooLowCount: 0, overRestCount: 0, overRestDuration: 0, failureCount: 0, failureDuration: 0, plankDuration: 0, rest: 0, score: 0, totalExerciseDuration: 0)){
+                        ExerciseRow(title: "Plank", image: "PlankIcon")
+                    }
+                    
+                    /// Temporary Disable: for v0.2.0
+//                    NavigationLink{
+//                        PreparationLegRaisesForm()
+//                    } label:{
+//                        ExerciseRow(title: "Leg Raise", image: "")
+//                    }
+                }
+            }
+            .navigationDestination(for: Plank.self){ plank in
+                if path.count == 2 && plank.repetitionEstimated > 0  {
+                                    PlankExercise(plankData: plank)
+                                    { plankResult in
+                                        print("💢path.count")
+                                        print(path.count)
+                                        path.removeLast(path.count)
+                                        print(path.count)
+                                        path.append(plankResult)
+                                        print(path.count)
+                                    }
+
+                                }
+
+                                if path.count < 2 && plank.repetitionEstimated < 1{
+                                    PreparationPlankForm(plankData: plank){ formPlank in
+                                        path.append(formPlank)
+
+                                    }
+                                }
+
+                                if path.count < 2 && plank.repetitionEstimated >= 1{
+                                    PlankFeedback(plank: plank)
+                                }
+            }
+            .navigationTitle("Home")
+            .listStyle(.inset)
+        }
+        .navigationBarTitleDisplayMode(.automatic)
     }
 }
 
