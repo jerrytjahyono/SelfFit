@@ -12,22 +12,6 @@ struct ContentView: View {
     @State private var selection: Tab = .home
     @State public var isTabViewActive = true
     
-    @State private var watchActivated = false
-    @State private var watchMessage = ""
-    var watchConnection = WatchConnector()
-    
-    
-    func activateWatch(){
-        if self.watchConnection.session.isReachable{
-            print("Watch avaliable")
-            self.watchActivated = true
-        }
-        else{
-            print("Watch unavaliable")
-            self.watchActivated = false
-        }
-    }
-    
     enum Tab {
         case home
         case history

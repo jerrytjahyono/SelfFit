@@ -23,6 +23,25 @@ class WatchConnector: NSObject, WCSessionDelegate {
         
     }
     
+    func sendMessage(_ message: [String : Any]) -> Void {
+        guard self.session.isReachable else {
+                return
+        }
+        
+        print("recive data from iphone")
+        if let plankStatus = message["plankStatus"] as? PlankStatus {
+            guard let plankStatusMessage = plankStatus.encodePlankStatus() else {
+                return
+            }
+            print("success data message")
+            print(plankStatusMessage)
+            
+            self.session.sendMessage(["plankStatus" : plankStatusMessage], replyHandler: nil){(error) in print("WatchOS ERROR SENDING MESSAGE - " + error.localizedDescription)
+                
+            }
+        }
+    }
+    
     func sessionDidBecomeInactive(_ session: WCSession) {
         
     }

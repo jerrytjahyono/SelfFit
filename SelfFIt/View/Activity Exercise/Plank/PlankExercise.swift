@@ -9,10 +9,6 @@ import SwiftUI
 import AVFAudio
 import AVFoundation
 
-enum ExerciseStatus {
-    case firstTime, active, rest, overRest, failure, finish
-}
-
 struct PlankExercise: View {
     @Environment(\.modelContext) private var context
     @State package var plankData: Plank
@@ -41,7 +37,12 @@ struct PlankExercise: View {
     @State var timer = Timer()
     @State var imageFrame: UIImage?
     
+    var watchConnection = WatchConnector()
+    
+    
     private let overRestTimerQueue = DispatchQueue.init(label: "OversestTimer.service", qos: .utility)
+    
+
     
     var body: some View {
 
@@ -120,6 +121,10 @@ struct PlankExercise: View {
                        }.foregroundColor(.blue)
                        .foregroundColor(.white)
                        
+            }
+            .onAppear {
+                
+                watchConnection.sendMessage(["plankStatus" : PlankStatus(condition: .firstTime, duration: self.plankData.plankDuration, restDuration: self.plankData.overRestDuration)])
             }
             .toolbar(.hidden, for: .tabBar)
             .toolbar {

@@ -9,11 +9,19 @@ import SwiftUI
 //import WatchConnectivity
 
 struct ContentView: View {
-
     @ObservedObject var watchConnection = WatchToIOS()
-    
+
     var body: some View {
-        HistoryList()
+        Text("Waiting for you to start exercise")
+        Text(watchConnection.receivedMessage)
+        
+        VStack{
+            if watchConnection != nil {
+                Text("Go start your plank")
+                Text("\(watchConnection.plankStatus?.duration)")
+            }
+        }.background(watchConnection.plankStatus?.condition == .firstTime ? .blue : .red)
+//        HistoryList()
     }
 }
 
