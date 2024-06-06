@@ -101,26 +101,6 @@ struct PlankExercise: View {
                         .onAppear {
                             watchConnection.sendMessage(["plankStatus" : PlankStatus(condition: .firstTime, duration: self.plankData.plankDuration, restDuration: self.plankData.rest)])
                         }
-                    VStack{
-                        Button("Active"){
-                            print("button active clicked")
-                            self.exerciseStatus = .active
-                        }
-                        Button("Rest"){
-                            self.exerciseStatus = .rest
-                        }
-                        Button("Failure"){
-                            self.exerciseStatus = .failure
-                        }
-                        Button("Finish"){
-                            self.exerciseStatus = .finish
-                        }
-                        Button("Over rest"){
-                            self.exerciseStatus = .overRest
-                        }
-                    }.padding()
-                    
-                    
                 }
                        VStack(alignment: .leading) {
                            Spacer()

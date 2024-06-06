@@ -11,19 +11,13 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var watchConnection = WatchToIOS()
+    @ObservedObject var timerService = TimerService()
     private var timer = Timer()
     @State var plankStatus :  PlankStatus?
 
     var body: some View {
         if watchConnection.plankStatus?.condition == .firstTime {
             Text("Please take a plank position")
-                .onAppear{
-                    print("cook")
-                    print(watchConnection.plankStatus?.condition)
-                    print(watchConnection.plankStatus)
-                    print(watchConnection)
-                    self.plankStatus = watchConnection.plankStatus
-                }
         }
         else if watchConnection.plankStatus?.condition == .finish {
             Text("Please check your phone to see feedback")
@@ -33,11 +27,8 @@ struct ContentView: View {
         }
         else{
             TimerWatchOS()
-                .onAppear{
-                    print("timer on appear")
-                    print(plankStatus)
-                }
                 .environmentObject(watchConnection)
+                .environmentObject(timerService)
         }
     }
 }

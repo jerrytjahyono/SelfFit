@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimerWatchOS: View {
     @EnvironmentObject var watchConnection : WatchToIOS
-    @ObservedObject var timerService = TimerService()
+    @EnvironmentObject var timerService : TimerService
 
     @State var currentCondition: ExerciseStatus = .firstTime
 
@@ -24,10 +24,6 @@ struct TimerWatchOS: View {
                     .foregroundStyle(.black)
             }
             .onAppear{
-                print("timer inside on appear")
-                print(watchConnection.plankStatus?.condition)
-                print(watchConnection.plankStatus)
-                print(watchConnection)
                 self .currentCondition = watchConnection.plankStatus?.condition ?? .firstTime
                 if watchConnection.plankStatus?.condition == .active {
                     timerService.startActiveTimer()
@@ -35,8 +31,6 @@ struct TimerWatchOS: View {
                 
             }
             .onChange(of: watchConnection.plankStatus?.condition){
-                print("watchConnection.plankStatus?.condition")
-                print(watchConnection.plankStatus?.condition)
                 if watchConnection.plankStatus?.condition == .active {
                     if currentCondition == .failure || currentCondition == .overRest || currentCondition == .firstTime {
                         
@@ -56,7 +50,6 @@ struct TimerWatchOS: View {
                     }
                 }else if watchConnection.plankStatus?.condition == .failure {
                     print(timerService.progressActive)
-                    print("bujang")
                     timerService.pauseActiveTimer()
                 }else if watchConnection.plankStatus?.condition == .overRest{
                     if currentCondition == .rest {
