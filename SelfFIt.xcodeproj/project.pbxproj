@@ -32,6 +32,7 @@
 		04D318B72C0F872000E90ED9 /* WatchToIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D318B62C0F872000E90ED9 /* WatchToIOS.swift */; };
 		04D318B92C0F887600E90ED9 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D318B82C0F887600E90ED9 /* HistoryRow.swift */; };
 		04D318BB2C0F892900E90ED9 /* LegRaiseFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D318BA2C0F892900E90ED9 /* LegRaiseFeedback.swift */; };
+		EE128DF92C11E56800127E3D /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE128DF82C11E56800127E3D /* TimerService.swift */; };
 		EE5104F72C0B717100F4F623 /* LegraiseDetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */; };
 		EEA9C1D52BFFD3950083BC9A /* PlankCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */; };
 		EEA9C1D72BFFD3B10083BC9A /* PlankExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */; };
@@ -97,6 +98,7 @@
 		04D318B62C0F872000E90ED9 /* WatchToIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchToIOS.swift; sourceTree = "<group>"; };
 		04D318B82C0F887600E90ED9 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
 		04D318BA2C0F892900E90ED9 /* LegRaiseFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseFeedback.swift; sourceTree = "<group>"; };
+		EE128DF82C11E56800127E3D /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		EE5104F62C0B717100F4F623 /* LegraiseDetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = LegraiseDetection.mlmodel; sourceTree = "<group>"; };
 		EEA9C1D42BFFD3950083BC9A /* PlankCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankCameraService.swift; sourceTree = "<group>"; };
 		EEA9C1D62BFFD3B10083BC9A /* PlankExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlankExercise.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				04D318AF2C0F805A00E90ED9 /* HistoryList.swift */,
 				04D318A32C0F801F00E90ED9 /* Assets.xcassets */,
 				04D318A52C0F801F00E90ED9 /* Preview Content */,
+				EE128DF82C11E56800127E3D /* TimerService.swift */,
 			);
 			path = "WatchSelfFit Watch App";
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				04D318B12C0F80B900E90ED9 /* Exercise.swift in Sources */,
 				04D318B22C0F80B900E90ED9 /* LegRaise.swift in Sources */,
 				04D318B72C0F872000E90ED9 /* WatchToIOS.swift in Sources */,
+				EE128DF92C11E56800127E3D /* TimerService.swift in Sources */,
 				04D318B92C0F887600E90ED9 /* HistoryRow.swift in Sources */,
 				04D318B32C0F80B900E90ED9 /* Plank.swift in Sources */,
 				04D318BB2C0F892900E90ED9 /* LegRaiseFeedback.swift in Sources */,
