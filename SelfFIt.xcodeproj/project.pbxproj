@@ -19,6 +19,8 @@
 		04840B092BFF946300C7B02C /* Plank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B082BFF946300C7B02C /* Plank.swift */; };
 		04840B0B2BFF946D00C7B02C /* LegRaise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B0A2BFF946D00C7B02C /* LegRaise.swift */; };
 		04840B0F2BFF980E00C7B02C /* LegRaiseFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04840B0E2BFF980E00C7B02C /* LegRaiseFeedback.swift */; };
+		04C5E9122C11E81600578867 /* CircleProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5E9112C11E81600578867 /* CircleProgress.swift */; };
+		04C5E9142C11F4F400578867 /* TimerWatchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5E9132C11F4F400578867 /* TimerWatchOS.swift */; };
 		04D318A02C0F801E00E90ED9 /* WatchSelfFitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3189F2C0F801E00E90ED9 /* WatchSelfFitApp.swift */; };
 		04D318A22C0F801E00E90ED9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D318A12C0F801E00E90ED9 /* ContentView.swift */; };
 		04D318A42C0F801F00E90ED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D318A32C0F801F00E90ED9 /* Assets.xcassets */; };
@@ -85,6 +87,8 @@
 		04840B082BFF946300C7B02C /* Plank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plank.swift; sourceTree = "<group>"; };
 		04840B0A2BFF946D00C7B02C /* LegRaise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaise.swift; sourceTree = "<group>"; };
 		04840B0E2BFF980E00C7B02C /* LegRaiseFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegRaiseFeedback.swift; sourceTree = "<group>"; };
+		04C5E9112C11E81600578867 /* CircleProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgress.swift; sourceTree = "<group>"; };
+		04C5E9132C11F4F400578867 /* TimerWatchOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWatchOS.swift; sourceTree = "<group>"; };
 		04D3189D2C0F801E00E90ED9 /* WatchSelfFit Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchSelfFit Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D3189F2C0F801E00E90ED9 /* WatchSelfFitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSelfFitApp.swift; sourceTree = "<group>"; };
 		04D318A12C0F801E00E90ED9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -145,7 +149,9 @@
 			children = (
 				04D3189F2C0F801E00E90ED9 /* WatchSelfFitApp.swift */,
 				04D318A12C0F801E00E90ED9 /* ContentView.swift */,
+				04C5E9132C11F4F400578867 /* TimerWatchOS.swift */,
 				04D318B62C0F872000E90ED9 /* WatchToIOS.swift */,
+				04C5E9112C11E81600578867 /* CircleProgress.swift */,
 				04D318A32C0F801F00E90ED9 /* Assets.xcassets */,
 				04D318A52C0F801F00E90ED9 /* Preview Content */,
 				EE128DF82C11E56800127E3D /* TimerService.swift */,
@@ -410,6 +416,8 @@
 				04D318A22C0F801E00E90ED9 /* ContentView.swift in Sources */,
 				04D318B12C0F80B900E90ED9 /* Exercise.swift in Sources */,
 				04D318B22C0F80B900E90ED9 /* LegRaise.swift in Sources */,
+				04C5E9122C11E81600578867 /* CircleProgress.swift in Sources */,
+				04C5E9142C11F4F400578867 /* TimerWatchOS.swift in Sources */,
 				04D318B72C0F872000E90ED9 /* WatchToIOS.swift in Sources */,
 				EE128DF92C11E56800127E3D /* TimerService.swift in Sources */,
 				04D318B32C0F80B900E90ED9 /* Plank.swift in Sources */,

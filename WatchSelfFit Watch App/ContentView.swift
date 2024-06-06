@@ -8,20 +8,24 @@
 import SwiftUI
 //import WatchConnectivity
 
+
 struct ContentView: View {
     @ObservedObject var watchConnection = WatchToIOS()
+    private var timer = Timer()
 
     var body: some View {
-        Text("Waiting for you to start exercise")
-        Text(watchConnection.receivedMessage)
-        
-        VStack{
-            if watchConnection != nil {
-                Text("Go start your plank")
-                Text("\(watchConnection.plankStatus?.duration)")
-            }
-        }.background(watchConnection.plankStatus?.condition == .firstTime ? .blue : .red)
-//        HistoryList()
+        if watchConnection.plankStatus?.condition == .firstTime {
+            Text("Please take a plank position")
+        }
+        else if watchConnection.plankStatus?.condition == .finish {
+            Text("Please check your phone to see feedback")
+        }
+        else if watchConnection.plankStatus?.condition == nil {
+            Text("Waiting for you to start exercise...")
+        }
+        else{
+            TimerWatchOS()
+        }
     }
 }
 
