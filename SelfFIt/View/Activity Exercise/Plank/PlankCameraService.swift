@@ -38,11 +38,9 @@ class PlankCameraService: NSObject, ObservableObject{
     @Published var isOnRest = false
     @Published var frameCount = 0 // New: Frame count to reduce update frequency
     
-    
     // inisiator untuk class `CameraService`
     override init(){
         super.init()
-        
         // ketika memanggil class maka akan langsung menjalankan 3 fungsi dibawah sekaligus
         addCameraInput()
         addVideoOutput()

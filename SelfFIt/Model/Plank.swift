@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+enum ExerciseStatus : Encodable, Decodable{
+    case firstTime, active, rest, overRest, failure, finish
+}
+
 @Model
 class Plank: Exercise {
     var id: String

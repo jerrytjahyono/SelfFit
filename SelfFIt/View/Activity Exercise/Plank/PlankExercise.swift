@@ -9,10 +9,6 @@ import SwiftUI
 import AVFAudio
 import AVFoundation
 
-enum ExerciseStatus {
-    case firstTime, active, rest, overRest, failure, finish
-}
-
 struct PlankExercise: View {
     @Environment(\.modelContext) private var context
     @State package var plankData: Plank
@@ -41,7 +37,12 @@ struct PlankExercise: View {
     @State var timer = Timer()
     @State var imageFrame: UIImage?
     
+    var watchConnection = WatchConnector()
+    
+    
     private let overRestTimerQueue = DispatchQueue.init(label: "OversestTimer.service", qos: .utility)
+    
+
     
     var body: some View {
 
@@ -97,6 +98,9 @@ struct PlankExercise: View {
                         .onReceive(self.cameraService.$cameraFrame, perform: { currentFrame in
                             self.imageFrame = currentFrame
                         })
+                        .onAppear {
+                            watchConnection.sendMessage(["plankStatus" : PlankStatus(condition: .firstTime, duration: self.plankData.plankDuration, restDuration: self.plankData.rest)])
+                        }
                 }
                        VStack(alignment: .leading) {
                            Spacer()
@@ -121,6 +125,10 @@ struct PlankExercise: View {
                        .foregroundColor(.white)
                        
             }
+            .onChange(of: self.exerciseStatus, {
+                print("onchange called \(self.exerciseStatus)")
+                watchConnection.sendMessage(["plankStatus" : PlankStatus(condition: self.exerciseStatus, duration: self.plankData.plankDuration, restDuration: self.plankData.rest)])
+            })
             .toolbar(.hidden, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
