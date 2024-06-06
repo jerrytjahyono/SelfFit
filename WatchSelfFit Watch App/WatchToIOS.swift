@@ -37,7 +37,7 @@ class WatchToIOS: NSObject, WCSessionDelegate, ObservableObject {
                 
                 print("success decode message")
                 self.plankStatus = plankStatusMessage as PlankStatus
-                print("Received message > \((self.plankStatus?.condition == .firstTime))" )
+                print("Received message > \((self.plankStatus?.condition))" )
                 UserDefaults.standard.set(self.plankStatus?.encodePlankStatus(), forKey: "plankStatus")
             }
             self.receivedMessage = message["Message"] as? String ?? ""

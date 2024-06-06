@@ -98,6 +98,29 @@ struct PlankExercise: View {
                         .onReceive(self.cameraService.$cameraFrame, perform: { currentFrame in
                             self.imageFrame = currentFrame
                         })
+                        .onAppear {
+                            watchConnection.sendMessage(["plankStatus" : PlankStatus(condition: .firstTime, duration: self.plankData.plankDuration, restDuration: self.plankData.rest)])
+                        }
+                    VStack{
+                        Button("Active"){
+                            print("button active clicked")
+                            self.exerciseStatus = .active
+                        }
+                        Button("Rest"){
+                            self.exerciseStatus = .rest
+                        }
+                        Button("Failure"){
+                            self.exerciseStatus = .failure
+                        }
+                        Button("Finish"){
+                            self.exerciseStatus = .finish
+                        }
+                        Button("Over rest"){
+                            self.exerciseStatus = .overRest
+                        }
+                    }.padding()
+                    
+                    
                 }
                        VStack(alignment: .leading) {
                            Spacer()
@@ -122,10 +145,10 @@ struct PlankExercise: View {
                        .foregroundColor(.white)
                        
             }
-            .onAppear {
-                
-                watchConnection.sendMessage(["plankStatus" : PlankStatus(condition: .firstTime, duration: self.plankData.plankDuration, restDuration: self.plankData.overRestDuration)])
-            }
+            .onChange(of: self.exerciseStatus, {
+                print("onchange called \(self.exerciseStatus)")
+                watchConnection.sendMessage(["plankStatus" : PlankStatus(condition: self.exerciseStatus, duration: self.plankData.plankDuration, restDuration: self.plankData.rest)])
+            })
             .toolbar(.hidden, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

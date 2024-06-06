@@ -8,20 +8,65 @@
 import SwiftUI
 
 struct TimerWatchOS: View {
-    @ObservedObject var watchConnection = WatchToIOS()
-    var secondsToCompletion = 1000
-    var progress: Float = 0.9
+    @EnvironmentObject var watchConnection : WatchToIOS
+    @ObservedObject var timerService = TimerService()
 
+    @State var currentCondition: ExerciseStatus = .firstTime
 
     var body: some View {
         ZStack {
             withAnimation {
-                CircleProgress(progress: progress)
+                CircleProgress(progress: progresEstimator())
             }
             VStack {
-                Text(secondsToCompletion.asTimestamp)
+                Text(watchConnection.plankStatus?.condition == .active || watchConnection.plankStatus?.condition == .failure ? timerService.progressActive.asTimestamp : timerService.progressRest.asTimestamp)
                     .font(.largeTitle)
                     .foregroundStyle(.black)
+            }
+            .onAppear{
+                print("timer inside on appear")
+                print(watchConnection.plankStatus?.condition)
+                print(watchConnection.plankStatus)
+                print(watchConnection)
+                self .currentCondition = watchConnection.plankStatus?.condition ?? .firstTime
+                if watchConnection.plankStatus?.condition == .active {
+                    timerService.startActiveTimer()
+                }
+                
+            }
+            .onChange(of: watchConnection.plankStatus?.condition){
+                print("watchConnection.plankStatus?.condition")
+                print(watchConnection.plankStatus?.condition)
+                if watchConnection.plankStatus?.condition == .active {
+                    if currentCondition == .failure || currentCondition == .overRest || currentCondition == .firstTime {
+                        
+                        timerService.startActiveTimer()
+                    }else if currentCondition == .rest {
+                        timerService.stopRestTimer()
+                        timerService.startActiveTimer()
+                    }else{
+                        timerService.idle()
+                    }
+                }else if watchConnection.plankStatus?.condition == .rest {
+                    if currentCondition == .active {
+                        timerService.stopActiveTimer()
+                        timerService.startRestTimer()
+                    }else {
+                        timerService.idle()
+                    }
+                }else if watchConnection.plankStatus?.condition == .failure {
+                    print(timerService.progressActive)
+                    print("bujang")
+                    timerService.pauseActiveTimer()
+                }else if watchConnection.plankStatus?.condition == .overRest{
+                    if currentCondition == .rest {
+                        timerService.idle()
+                    }
+                }else {
+                    timerService.idle()
+                }
+                
+                self.currentCondition = watchConnection.plankStatus?.condition ?? .firstTime
             }
         }
         .frame(maxWidth: .infinity)
@@ -39,6 +84,15 @@ struct TimerWatchOS: View {
         case .overRest, .failure:
             return Color("PastelRed")
         }
+    }
+    
+    func progresEstimator() -> Float {
+        if watchConnection.plankStatus?.condition == .active || watchConnection.plankStatus?.condition == .failure  {
+            return Float(Float(self.timerService.progressActive) / Float(watchConnection.plankStatus?.duration ?? 0))
+        }else if watchConnection.plankStatus?.condition == .rest {
+            return Float(Float(self.timerService.progressRest) / Float(watchConnection.plankStatus?.restDuration ?? 0))
+        }
+        return 0.0
     }
 }
 
