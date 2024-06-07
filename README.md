@@ -1,6 +1,9 @@
 # SelfFit
 Aplikasi pemantau gerakan olahraga yang benar, dan memanajemen proses olahraga kita
 
+- [About](https://github.com/jerrytjahyono/SelfFit/tree/dev?tab=readme-ov-file#about)
+- [Class diagram](https://github.com/jerrytjahyono/SelfFit/tree/dev?tab=readme-ov-file#class-diagram)
+
 ## About
 ---
 Self Fit meningkatkan efektivitas dan ketepatan latihan dengan panduan real-time yang memotivasi konsistensi. Proyek ini berhasil memanfaatkan teknologi AI dan komputer “vision” untuk menciptakan solusi inovatif bagi kesehatan. 
@@ -10,7 +13,7 @@ Aplikasi ini bertujuan memfasilitasi latihan olahraga di rumah, terutama bagi me
 Dengan demikian, aplikasi ini tidak hanya membantu dalam pelaksanaan latihan tetapi juga dalam pengukuran hasil yang dicapai.
 
 
-## Clss diagram
+## Class diagram
 ---
 [selfit class diagram.pdf](https://github.com/user-attachments/files/15714025/selfit.class.diagram.pdf)
 ![selfit class diagram](https://github.com/jerrytjahyono/SelfFit/assets/96227680/4a44be01-146c-40ff-bd17-2c785356e197)
