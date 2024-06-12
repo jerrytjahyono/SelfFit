@@ -273,7 +273,6 @@ struct PlankExercise: View {
     }
 }
 
-
 extension Int {
     
     func convertToTimesStr() -> (Int, Int, Int) {

@@ -79,6 +79,7 @@ struct ExerciseHome: View {
                                         path.append(plankResult)
                                         print(path.count)
                                     }
+                                    .forceRotation(orientation: .landscapeRight)
 
                                 }
 
